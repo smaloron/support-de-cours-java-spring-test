@@ -1,0 +1,196 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-06-27T16:25:10.678273"><title>Chapitre 11 : L'Art du Test : Bonnes Pratiques et Strat&eacute;gies Avanc&eacute;es (L'essentiel) | Java Spring Test</title><script type="application/json" id="virtual-toc-data">[{"id":"objectifs-p-dagogiques","level":0,"title":"Objectifs pédagogiques","anchor":"#objectifs-p-dagogiques"},{"id":"introduction-devenir-un-artisan-du-code","level":0,"title":"Introduction : Devenir un artisan du code","anchor":"#introduction-devenir-un-artisan-du-code"},{"id":"l-importance-d-un-nommage-clair","level":0,"title":"L\u0027Importance d\u0027un Nommage Clair","anchor":"#l-importance-d-un-nommage-clair"},{"id":"organiser-vos-tests","level":0,"title":"Organiser Vos Tests","anchor":"#organiser-vos-tests"},{"id":"dry-don-t-repeat-yourself-dans-les-tests","level":0,"title":"DRY (Don\u0027t Repeat Yourself) dans les Tests","anchor":"#dry-don-t-repeat-yourself-dans-les-tests"},{"id":"le-pattern-test-data-builder","level":0,"title":"Le Pattern \"Test Data Builder\"","anchor":"#le-pattern-test-data-builder"},{"id":"la-couverture-de-code-code-coverage","level":0,"title":"La Couverture de Code (Code Coverage)","anchor":"#la-couverture-de-code-code-coverage"},{"id":"exercice-14-refactoriser-un-test-avec-un-builder","level":0,"title":"Exercice 14 : Refactoriser un test avec un Builder","anchor":"#exercice-14-refactoriser-un-test-avec-un-builder"},{"id":"correction-exercice-14","level":0,"title":"Correction exercice 14","anchor":"#correction-exercice-14"},{"id":"auto-valuation","level":0,"title":"Auto-évaluation","anchor":"#auto-valuation"},{"id":"conclusion-de-la-partie","level":0,"title":"Conclusion de la partie","anchor":"#conclusion-de-la-partie"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Chapitre 11 : L'Art du Test : Bonnes Pratiques et Strat&eacute;gies Avanc&eacute;es (L'essentiel) | Java Spring Test"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Java Spring Test Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/011-00-best-practices.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Chapitre 11 : L'Art du Test : Bonnes Pratiques et Strat&eacute;gies Avanc&eacute;es (L'essentiel) | Java Spring Test"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/011-00-best-practices.html#webpage",
+    "url": "writerside-documentation/011-00-best-practices.html",
+    "name": "Chapitre 11 : L'Art du Test : Bonnes Pratiques et Strat&eacute;gies Avanc&eacute;es (L'essentiel) | Java Spring Test",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Java Spring Test Help"
+}</script><!-- End Schema.org --></head><body data-id="011-00-best-practices" data-main-title="Chapitre 11 : L'Art du Test : Bonnes Pratiques et Stratégies Avancées (L'essentiel)" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Java Spring Test  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="011-00-best-practices" id="011-00-best-practices.md">Chapitre 11 : L'Art du Test : Bonnes Pratiques et Stratégies Avancées (L'essentiel)</h1><section class="chapter"><h2 id="objectifs-p-dagogiques" data-toc="objectifs-p-dagogiques">Objectifs p&eacute;dagogiques</h2><p id="jxbtj2_14">&Agrave; la fin de cette partie, vous serez en mesure de :</p><ul class="list _bullet" id="jxbtj2_15"><li class="list__item" id="jxbtj2_16"><p id="jxbtj2_21"><span class="control" id="jxbtj2_22">Nommer</span> vos tests de mani&egrave;re claire et descriptive.</p></li><li class="list__item" id="jxbtj2_17"><p id="jxbtj2_23"><span class="control" id="jxbtj2_24">Organiser</span> vos classes et packages de test de fa&ccedil;on logique.</p></li><li class="list__item" id="jxbtj2_18"><p id="jxbtj2_25"><span class="control" id="jxbtj2_26">Appliquer</span> le principe DRY (Don't Repeat Yourself) dans vos tests en utilisant des m&eacute;thodes utilitaires.</p></li><li class="list__item" id="jxbtj2_19"><p id="jxbtj2_27"><span class="control" id="jxbtj2_28">Comprendre</span> le concept de &quot;Test Data Builders&quot; pour cr&eacute;er des objets de test complexes.</p></li><li class="list__item" id="jxbtj2_20"><p id="jxbtj2_29"><span class="control" id="jxbtj2_30">Expliquer</span> ce qu'est la couverture de code (Code Coverage) et comment interpr&eacute;ter cette m&eacute;trique.</p></li></ul></section><section class="chapter"><h2 id="introduction-devenir-un-artisan-du-code" data-toc="introduction-devenir-un-artisan-du-code">Introduction : Devenir un artisan du code</h2><p id="jxbtj2_31">Imaginez deux artisans menuisiers. Tous deux savent utiliser une scie et un marteau. Le premier laisse ses outils partout, coupe ses planches de mani&egrave;re approximative et assemble ses meubles sans plan pr&eacute;cis. Le second a un atelier impeccable, chaque outil &agrave; sa place, des gabarits pour des coupes parfaites, et des plans d&eacute;taill&eacute;s. Lequel des deux produira des meubles de qualit&eacute;, durables et faciles &agrave; r&eacute;parer ?</p><p id="jxbtj2_32">&Ecirc;tre un bon d&eacute;veloppeur, c'est &ecirc;tre comme le second artisan. Il ne suffit pas de savoir utiliser JUnit et Mockito. Il faut savoir <span class="control" id="jxbtj2_34">organiser son travail, nommer ses outils et ses pi&egrave;ces, et suivre des plans &eacute;prouv&eacute;s</span>.</p><p id="jxbtj2_33">Ce chapitre est consacr&eacute; &agrave; l'organisation de votre &quot;atelier de test&quot;. Nous allons voir comment des pratiques simples de nommage, d'organisation et de factorisation peuvent transformer une suite de tests chaotique en une ressource claire, maintenable et d'une valeur inestimable pour votre &eacute;quipe.</p></section><section class="chapter"><h2 id="l-importance-d-un-nommage-clair" data-toc="l-importance-d-un-nommage-clair">L'Importance d'un Nommage Clair</h2><p id="jxbtj2_35">Le nom de votre m&eacute;thode de test est la premi&egrave;re chose que vous verrez quand un test &eacute;chouera. Il doit &ecirc;tre une phrase compl&egrave;te et sans ambigu&iuml;t&eacute;.</p><div class="tabs" id="jxbtj2_36" data-anchors="[jxbtj2_37,jxbtj2_38]"><div class="tabs__content" data-gtm="tab" id="jxbtj2_37" data-title="Mauvais Nommage ❌"><p id="jxbtj2_39">Noms vagues, techniques, qui ne disent pas l'intention.</p><p> <code class="code" id="jxbtj2_40">@Test void test1() { ... } <p id="jxbtj2_42">@Test void testGetUser()</p> <p id="jxbtj2_43">@Test void testError()</p></code></p><p id="jxbtj2_41">Si <code class="code" id="jxbtj2_44">testError</code> &eacute;choue, quelle erreur ? Dans quelles conditions ? Vous devez lire tout le code pour comprendre.</p></div><div class="tabs__content" data-gtm="tab" id="jxbtj2_38" data-title="Bon Nommage ✅"><p id="jxbtj2_45">Une convention populaire est <b id="jxbtj2_48"><code class="code" id="jxbtj2_49">methodName_shouldXXX_whenYYY</code></b>. Elle d&eacute;crit l'action, le r&eacute;sultat attendu et le contexte.</p><p> <code class="code" id="jxbtj2_46">@Test void findById_shouldReturnUser_whenUserExists() { ... } <p id="jxbtj2_50">@Test void findById_shouldReturnEmpty_whenUserDoesNotExist()</p> <p id="jxbtj2_51">@Test @DisplayName(&quot;Doit lancer une exception si le solde est insuffisant&quot;) // Encore mieux ! void withdraw_shouldThrowException_whenBalanceIsInsufficient()</p></code></p><p id="jxbtj2_47">Le nom du test est auto-document&eacute;. L'intention est limpide.</p></div></div></section><section class="chapter"><h2 id="organiser-vos-tests" data-toc="organiser-vos-tests">Organiser Vos Tests</h2><p id="jxbtj2_52">Une bonne organisation des packages de test facilite la navigation et la compr&eacute;hension. La meilleure pratique est de * <span class="emphasis" id="jxbtj2_55">refl&eacute;ter la structure de vos packages de code source</span>*.</p><div class="code-block" data-lang="none">
+src/
+├── main/java/
+│   └── fr/formation/spring/
+│       ├── api/
+│       │   └── BookController.java
+│       └── service/
+│           └── BookService.java
+└── test/java/
+    └── fr/formation/spring/
+        ├── api/
+        │   └── BookControllerTest.java
+        └── service/
+            └── BookServiceTest.java
+</div><p id="jxbtj2_54">Cette structure en miroir permet de trouver instantan&eacute;ment le test associ&eacute; &agrave; une classe, et vice-versa.</p></section><section class="chapter"><h2 id="dry-don-t-repeat-yourself-dans-les-tests" data-toc="dry-don-t-repeat-yourself-dans-les-tests">DRY (Don't Repeat Yourself) dans les Tests</h2><p id="jxbtj2_56">La duplication de code est aussi n&eacute;faste dans les tests que dans le code de production. Si vous vous retrouvez &agrave; copier-coller des blocs de code de configuration dans plusieurs tests, c'est un signal qu'il faut factoriser.</p><p id="jxbtj2_57"><span class="control" id="jxbtj2_62">Exemple de duplication :</span></p><div class="code-block" data-lang="java">
+
+@Test
+void test1() {
+    // 5 lignes pour créer un utilisateur complexe
+    User user = new User();
+    user.setFirstName(&quot;Alex&quot;);
+    user.setLastName(&quot;Dev&quot;);
+    user.setAddress(new Address(&quot;10 rue du Code&quot;, &quot;Paris&quot;));
+    // ...
+}
+
+@Test
+void test2() {
+    // Les 5 mêmes lignes...
+    User user = new User();
+    user.setFirstName(&quot;Alex&quot;);
+    user.setLastName(&quot;Dev&quot;);
+    user.setAddress(new Address(&quot;10 rue du Code&quot;, &quot;Paris&quot;));
+    // ...
+}
+</div><p id="jxbtj2_59"><span class="control" id="jxbtj2_63">Solution simple : Une m&eacute;thode utilitaire priv&eacute;e</span></p><div class="code-block" data-lang="java">
+
+@Test
+void test1() {
+    User user = createDefaultUser();
+    // ...
+}
+
+@Test
+void test2() {
+    User user = createDefaultUser();
+    // ...
+}
+
+private User createDefaultUser() {
+    User user = new User();
+    user.setFirstName(&quot;Alex&quot;);
+    user.setLastName(&quot;Dev&quot;);
+    user.setAddress(new Address(&quot;10 rue du Code&quot;, &quot;Paris&quot;));
+    return user;
+}
+</div><p id="jxbtj2_61">C'est simple, lisible et si la structure de <code class="code" id="jxbtj2_64">User</code> change, vous n'avez qu'un seul endroit &agrave; modifier.</p></section><section class="chapter"><h2 id="le-pattern-test-data-builder" data-toc="le-pattern-test-data-builder">Le Pattern &quot;Test Data Builder&quot;</h2><p id="jxbtj2_65">Pour la cr&eacute;ation d'objets de test complexes et vari&eacute;s, la m&eacute;thode utilitaire a ses limites. Le pattern <span class="control" id="jxbtj2_73">Builder</span> est une solution bien plus puissante et flexible. Il permet de cr&eacute;er des objets de test de mani&egrave;re fluide et lisible.</p><p id="jxbtj2_66"><span class="control" id="jxbtj2_74">Sans Builder :</span></p><div class="code-block" data-lang="java">
+// On ne voit pas ce qui est important pour ce test spécifique.
+// C'est bruyant.
+User user = new User(1L, &quot;admin&quot;, &quot;pwd123&quot;, &quot;ADMIN&quot;, true, false);
+</div><p id="jxbtj2_68"><span class="control" id="jxbtj2_75">Avec un Builder :</span></p><div class="code-block" data-lang="java">
+public class UserBuilder {
+    private String username = &quot;defaultUser&quot;;
+    private String role = &quot;USER&quot;;
+
+    public UserBuilder withUsername(String username) {
+        this.username = username;
+        return this;
+    }
+
+    public UserBuilder withRole(String role) {
+        this.role = role;
+        return this;
+    }
+
+    public UserBuilder asAdmin() {
+        this.username = &quot;admin&quot;;
+        this.role = &quot;ADMIN&quot;;
+        return this;
+    }
+
+    public User build() {
+        // ... logique de création de l'objet User
+        return new User(username, role);
+    }
+}
+</div><p id="jxbtj2_70"><span class="control" id="jxbtj2_76">Utilisation dans le test :</span></p><div class="code-block" data-lang="java">
+// On voit immédiatement les données qui comptent pour ce test
+User regularUser = new UserBuilder().build();
+
+User specificUser = new UserBuilder()
+        .withUsername(&quot;alex.dev&quot;)
+        .build();
+
+User admin = new UserBuilder().asAdmin().build();
+</div><p id="jxbtj2_72">Le test devient une description de l'intention, pas une c&eacute;r&eacute;monie de <code class="code" id="jxbtj2_77">setters</code>.</p></section><section class="chapter"><h2 id="la-couverture-de-code-code-coverage" data-toc="la-couverture-de-code-code-coverage">La Couverture de Code (Code Coverage)</h2><p id="jxbtj2_78">La couverture de code est une m&eacute;trique qui indique <span class="control" id="jxbtj2_81">quel pourcentage de votre code de production a &eacute;t&eacute; ex&eacute;cut&eacute; par vos tests automatis&eacute;s</span>. Un outil comme <span class="control" id="jxbtj2_82">JaCoCo</span> (Java Code Coverage) s'int&egrave;gre &agrave; votre build (Maven, Gradle) et g&eacute;n&egrave;re des rapports visuels.</p><style>.theme-dark .plantuml > svg {filter: hue-rotate(180deg) invert(0.9);}div.plantuml {overflow-x: auto;}</style><div class="plantuml"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="329px" preserveAspectRatio="none" style="width:668px;height:329px;background:#FFFFFF;" version="1.1" viewBox="0 0 668 329" width="668px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="Verdana" font-size="22" font-weight="bold" lengthAdjust="spacing" textLength="511" x="74" y="37.1182">Rapport de Couverture de Code (JaCoCo)</text><!--cluster Classe MyService.java--><g id="cluster_Classe MyService.java"><path d="M13.5,58.7373 L185.5,58.7373 A3.75,3.75 0 0 1 188,61.2373 L195,81.752 L658.5,81.752 A2.5,2.5 0 0 1 661,84.252 L661,242.2673 A2.5,2.5 0 0 1 658.5,244.7673 L13.5,244.7673 A2.5,2.5 0 0 1 11,242.2673 L11,61.2373 A2.5,2.5 0 0 1 13.5,58.7373 " fill="#FFFFFF" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:1.0;" x1="11" x2="195" y1="81.752" y2="81.752"/><text fill="#000000" font-family="Verdana" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="171" x="15" y="74.8125">Classe MyService.java</text></g><!--entity Ligne 1: `if (value > 10) {`--><g id="elem_Ligne 1: `if (value &gt; 10) {`"><rect fill="#90EE90" height="37.0146" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="217" x="27.5" y="94.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="197" x="37.5" y="118.8125">Ligne 1: `if (value &gt; 10) {`</text></g><!--entity Ligne 2: `  return a;`--><g id="elem_Ligne 2: `  return a;`"><rect fill="#90EE90" height="37.0146" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="174" x="280" y="94.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="154" x="290" y="118.8125">Ligne 2: `  return a;`</text></g><!--entity Ligne 3: `} else {`--><g id="elem_Ligne 3: `} else {`"><rect fill="#90EE90" height="37.0146" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="156" x="489" y="94.7373"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="136" x="499" y="118.8125">Ligne 3: `} else {`</text></g><!--entity Ligne 4: `  return b;`--><g id="elem_Ligne 4: `  return b;`"><rect fill="#FF6347" height="37.0146" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="175" x="48.5" y="191.7573"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="155" x="58.5" y="215.8325">Ligne 4: `  return b;`</text></g><!--entity Ligne 5: `}`--><g id="elem_Ligne 5: `}`"><rect fill="#90EE90" height="37.0146" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="110" x="259" y="191.7573"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="90" x="269" y="215.8325">Ligne 5: `}`</text></g><rect fill="none" height="61.0439" id="_legend" rx="7.5" ry="7.5" style="stroke:#000000;stroke-width:1.0;" width="463" x="98" y="255.7673"/><text fill="#90EE90" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="30" x="108" y="274.8425">Vert</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="271" x="148" y="274.8425">: Ligne couverte par au moins un test.</text><text fill="#FF6347" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="44" x="108" y="291.8571">Rouge</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="150" x="162" y="291.8571">: Ligne non couverte.</text><text fill="#FFFF00" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="40" x="108" y="308.8718">Jaune</text><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="398" x="158" y="308.8718">: Branche partiellement couverte (ex: un if sans le else).</text><!--SRC=[ZP8_JyCm4CLtVuf7MDebKFuieSf01gGAbeAGs7gaHsfmxSYn0wZgT-VIIBIKIh1Oik_Up- -UVHGMl6JKXhHLGGV3c59TEnymPnGkjkn3zDplP1bCg7256ofLK_b65ICf33KDu-xpddshIqvVgQK4AmLuBWFPIgZ9hQuiOvHXfbymQCb4HexHwH2hMO9ZAI_2ZMUsXsHd8kkEnOe5NVqjE1V16cp4rp_m5xluvmt-mIqfk4FDbnrwZxbMod35TWvHZ4jddC-svHoFaYB69vj2ZWmzgUpZbVZ9WoAMJji6qI9m4z8jgVUIO-gYvFqBOvtzHksedjWOzvvZGj7-K5rxikLYSslGqYGVm8QjcG5_P9q9UQQ6n8zCtkKuJ5KtNp_c5m00]--></g></svg></div><aside class="prompt" data-type="warning" data-title="" id="jxbtj2_80"><p>**La couverture est un outil, pas un objectif.** - **Ce qu'elle fait bien :** Elle vous montre les zones de votre code qui ne sont **pas du tout test&eacute;es**. C'est un excellent moyen de rep&eacute;rer des oublis. - **Son pi&egrave;ge :** Un taux de couverture de 100% ne signifie pas que votre code est exempt de bugs. Cela signifie juste que chaque ligne a &eacute;t&eacute; ex&eacute;cut&eacute;e. Vous pouvez avoir 100% de couverture avec des tests qui n'ont aucune assertion et qui ne valident rien. </p><p id="jxbtj2_83"><span class="control" id="jxbtj2_84">R&egrave;gle d'or :</span> Ne visez pas un chiffre. Utilisez la couverture pour guider votre effort de test vers les zones d'ombre de votre application. Un taux de 80-85% sur la logique m&eacute;tier complexe est souvent consid&eacute;r&eacute; comme un excellent objectif.</p></aside></section><section class="chapter"><h2 id="exercice-14-refactoriser-un-test-avec-un-builder" data-toc="exercice-14-refactoriser-un-test-avec-un-builder">Exercice 14 : Refactoriser un test avec un Builder</h2><p id="jxbtj2_85">Vous avez plusieurs tests pour un <code class="code" id="jxbtj2_90">OrderService</code> qui manipulent des objets <code class="code" id="jxbtj2_91">Order</code> complexes. La cr&eacute;ation de ces objets est r&eacute;p&eacute;titive.</p><p id="jxbtj2_86"><span class="control" id="jxbtj2_92">Le code de test r&eacute;p&eacute;titif :</span></p><div class="code-block" data-lang="java">
+
+@Test
+void testShippedOrder() {
+    Order order = new Order(UUID.randomUUID());
+    order.setCustomer(new Customer(&quot;C01&quot;, &quot;Alex&quot;));
+    order.setStatus(OrderStatus.SHIPPED);
+    order.setShippingDate(Instant.now());
+    order.setTotalPrice(new BigDecimal(&quot;150.00&quot;));
+    // ... test
+}
+
+@Test
+void testPendingHighValueOrder() {
+    Order order = new Order(UUID.randomUUID());
+    order.setCustomer(new Customer(&quot;C02&quot;, &quot;Sophie&quot;));
+    order.setStatus(OrderStatus.PENDING);
+    order.setShippingDate(null);
+    order.setTotalPrice(new BigDecimal(&quot;1200.00&quot;));
+    // ... test
+}
+</div><p id="jxbtj2_88"><span class="control" id="jxbtj2_93">Votre mission :</span></p><ol class="list _decimal" id="jxbtj2_89" type="1"><li class="list__item" id="jxbtj2_94"><p id="jxbtj2_99">Cr&eacute;ez une classe <code class="code" id="jxbtj2_100">OrderBuilder</code> dans votre r&eacute;pertoire de test.</p></li><li class="list__item" id="jxbtj2_95"><p id="jxbtj2_101">Cette classe doit permettre de construire un <code class="code" id="jxbtj2_102">Order</code> avec des valeurs par d&eacute;faut (par exemple, un statut <code class="code" id="jxbtj2_103">PENDING</code>, un prix de <code class="code" id="jxbtj2_104">10.00</code>).</p></li><li class="list__item" id="jxbtj2_96"><p id="jxbtj2_105">Ajoutez des m&eacute;thodes fluides comme <code class="code" id="jxbtj2_106">withStatus(OrderStatus status)</code>, <code class="code" id="jxbtj2_107">withTotalPrice(BigDecimal price)</code>.</p></li><li class="list__item" id="jxbtj2_97"><p id="jxbtj2_108">Ajoutez une m&eacute;thode de &quot;raccourci&quot; comme <code class="code" id="jxbtj2_109">shipped()</code> qui configure l'order avec un statut <code class="code" id="jxbtj2_110">SHIPPED</code> et une date d'exp&eacute;dition.</p></li><li class="list__item" id="jxbtj2_98"><p id="jxbtj2_111">Refactorisez les deux tests ci-dessus pour utiliser votre nouveau <code class="code" id="jxbtj2_112">OrderBuilder</code>.</p></li></ol></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h2 id="correction-exercice-14" data-toc="correction-exercice-14">Correction exercice 14</h2></div><div class="collapse__content"><p id="jxbtj2_113"><span class="control" id="jxbtj2_118">1, 2, 3, 4. La classe <code class="code" id="jxbtj2_119">OrderBuilder</code>:</span></p><div class="code-block" data-lang="java">
+// Dans src/test/java/fr/formation/spring/builder/OrderBuilder.java
+package fr.formation.spring.builder;
+
+import fr.formation.spring.model.Order;
+import fr.formation.spring.model.OrderStatus;
+
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.UUID;
+
+public class OrderBuilder {
+    private OrderStatus status = OrderStatus.PENDING;
+    private BigDecimal totalPrice = new BigDecimal(&quot;10.00&quot;);
+    private Instant shippingDate = null;
+
+    public OrderBuilder withStatus(OrderStatus status) {
+        this.status = status;
+        return this;
+    }
+
+    public OrderBuilder withTotalPrice(BigDecimal price) {
+        this.totalPrice = price;
+        return this;
+    }
+
+    public OrderBuilder shipped() {
+        this.status = OrderStatus.SHIPPED;
+        this.shippingDate = Instant.now();
+        return this;
+    }
+
+    public Order build() {
+        Order order = new Order(UUID.randomUUID());
+        order.setStatus(status);
+        order.setTotalPrice(totalPrice);
+        order.setShippingDate(shippingDate);
+        // ... on pourrait aussi configurer un client par défaut
+        return order;
+    }
+}
+</div><p id="jxbtj2_115"><span class="control" id="jxbtj2_120">5. Les tests refactoris&eacute;s :</span></p><div class="code-block" data-lang="java">
+
+@Test
+void testShippedOrder() {
+    Order order = new OrderBuilder()
+            .shipped()
+            .withTotalPrice(new BigDecimal(&quot;150.00&quot;))
+            .build();
+    // ... test
+    assertThat(order.getStatus()).isEqualTo(OrderStatus.SHIPPED);
+    assertThat(order.getShippingDate()).isNotNull();
+}
+
+@Test
+void testPendingHighValueOrder() {
+    Order order = new OrderBuilder()
+            .withStatus(OrderStatus.PENDING) // Explicite, même si c'est le défaut
+            .withTotalPrice(new BigDecimal(&quot;1200.00&quot;))
+            .build();
+    // ... test
+    assertThat(order.getStatus()).isEqualTo(OrderStatus.PENDING);
+    assertThat(order.getTotalPrice()).isEqualByComparingTo(&quot;1200.00&quot;);
+}
+</div><p id="jxbtj2_117">Les tests sont plus courts, plus lisibles et d&eacute;crivent leur intention au lieu de se noyer dans les d&eacute;tails de la cr&eacute;ation d'objets.</p></div></div></section><section class="chapter"><h2 id="auto-valuation" data-toc="auto-valuation">Auto-&eacute;valuation</h2><ol class="list _decimal" id="jxbtj2_121" type="1"><li class="list__item" id="jxbtj2_123"><p id="jxbtj2_128">(Question ouverte) Expliquez la convention de nommage <code class="code" id="jxbtj2_129">method_should_when</code> et pourquoi elle est utile.</p></li><li class="list__item" id="jxbtj2_124"><p id="jxbtj2_130">(QCM) Le pattern &quot;Test Data Builder&quot; est principalement utilis&eacute; pour :</p><ul class="list _bullet" id="jxbtj2_131"><li class="list__item" id="jxbtj2_132"><p id="jxbtj2_136">a) Rendre les tests plus rapides.</p></li><li class="list__item" id="jxbtj2_133"><p id="jxbtj2_137">b) Augmenter la couverture de code.</p></li><li class="list__item" id="jxbtj2_134"><p id="jxbtj2_138">c) Simplifier la cr&eacute;ation d'objets de test complexes et am&eacute;liorer la lisibilit&eacute; des tests.</p></li><li class="list__item" id="jxbtj2_135"><p id="jxbtj2_139">d) Remplacer Mockito.</p></li></ul></li><li class="list__item" id="jxbtj2_125"><p id="jxbtj2_140">(Question ouverte) Un rapport de couverture de code indique 95%. Qu'est-ce que cela signifie, et surtout, qu'est-ce que cela ne signifie pas ?</p></li><li class="list__item" id="jxbtj2_126"><p id="jxbtj2_141">(QCM) Le principe DRY dans les tests signifie :</p><ul class="list _bullet" id="jxbtj2_142"><li class="list__item" id="jxbtj2_143"><p id="jxbtj2_147">a) Dynamic Rollback Yields.</p></li><li class="list__item" id="jxbtj2_144"><p id="jxbtj2_148">b) Don't Repeat Yourself - &Eacute;viter la duplication de code.</p></li><li class="list__item" id="jxbtj2_145"><p id="jxbtj2_149">c) Data Repository Yields.</p></li><li class="list__item" id="jxbtj2_146"><p id="jxbtj2_150">d) Drive, Reverse, Yield.</p></li></ul></li><li class="list__item" id="jxbtj2_127"><p id="jxbtj2_151">(QCM) La meilleure fa&ccedil;on d'organiser ses packages de test est :</p><ul class="list _bullet" id="jxbtj2_152"><li class="list__item" id="jxbtj2_153"><p id="jxbtj2_157">a) Mettre tous les tests dans un seul package.</p></li><li class="list__item" id="jxbtj2_154"><p id="jxbtj2_158">b) Cr&eacute;er une structure de packages qui refl&egrave;te celle du code source.</p></li><li class="list__item" id="jxbtj2_155"><p id="jxbtj2_159">c) Cr&eacute;er des packages par type de test (unitaire, int&eacute;gration...).</p></li><li class="list__item" id="jxbtj2_156"><p id="jxbtj2_160">d) Laisser l'IDE choisir la structure.</p></li></ul></li></ol><p id="jxbtj2_122"><span class="emphasis" id="jxbtj2_161">(Les corrections de l'auto-&eacute;valuation seront fournies &agrave; la toute fin du support de cours.)</span></p></section><section class="chapter"><h2 id="conclusion-de-la-partie" data-toc="conclusion-de-la-partie">Conclusion de la partie</h2><p id="jxbtj2_162">Vous &ecirc;tes d&eacute;sormais bien plus qu'un simple utilisateur d'outils de test. Vous &ecirc;tes un artisan qui sait organiser son atelier, nommer ses outils et utiliser des techniques avanc&eacute;es pour travailler proprement et efficacement. Vous savez qu'un nommage clair, une bonne organisation, la factorisation du code via des m&eacute;thodes utilitaires ou des <span class="control" id="jxbtj2_164">Builders</span>, et une utilisation intelligente de la <span class="control" id="jxbtj2_165">couverture de code</span> sont les cl&eacute;s pour cr&eacute;er une suite de tests qui sera un v&eacute;ritable atout pour votre projet.</p><p id="jxbtj2_163">Dans la partie &quot;Pour aller plus loin&quot; de ce chapitre, nous aborderons des strat&eacute;gies encore plus avanc&eacute;es comme le TDD et le BDD, et nous verrons comment int&eacute;grer nos tests dans un pipeline d'int&eacute;gration continue. Vous &ecirc;tes pr&ecirc;t pour les concepts qui d&eacute;finissent le d&eacute;veloppement logiciel moderne de haute qualit&eacute;.</p></section><div class="last-modified">16 juin 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="010-00-async-test.html" class="navigation-links__prev">Chapitre 10 : Le Test dans une Autre Dimension : Code Asynchrone et R&eacute;actif (L'essentiel)</a><a href="011-01-tdd.html" class="navigation-links__next">Chapitre 11 : Strat&eacute;gies de Qualit&eacute; Sup&eacute;rieure et Automatisation (Pour aller plus loin)</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

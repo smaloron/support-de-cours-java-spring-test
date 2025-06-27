@@ -1,0 +1,268 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-06-27T16:25:10.66728"><title>Chapitre 2 : Les Outils Essentiels du Testeur Java (L'essentiel) | Java Spring Test</title><script type="application/json" id="virtual-toc-data">[{"id":"objectifs-p-dagogiques","level":0,"title":"Objectifs pédagogiques","anchor":"#objectifs-p-dagogiques"},{"id":"introduction-votre-premi-re-caisse-outils","level":0,"title":"Introduction : Votre première caisse à outils","anchor":"#introduction-votre-premi-re-caisse-outils"},{"id":"junit-5-votre-terrain-de-jeu-pour-les-tests","level":0,"title":"JUnit 5 : Votre Terrain de Jeu pour les Tests","anchor":"#junit-5-votre-terrain-de-jeu-pour-les-tests"},{"id":"mockito-l-art-de-l-illusion-pour-des-tests-unitaires-purs","level":0,"title":"Mockito : L\u0027Art de l\u0027Illusion pour des Tests Unitaires Purs","anchor":"#mockito-l-art-de-l-illusion-pour-des-tests-unitaires-purs"},{"id":"assertj-crire-des-tests-qui-se-lisent-comme-des-phrases","level":0,"title":"AssertJ : Écrire des Tests qui se Lisent comme des Phrases","anchor":"#assertj-crire-des-tests-qui-se-lisent-comme-des-phrases"},{"id":"exercice-3-mettre-en-pratique-le-trio-junit-mockito-assertj","level":0,"title":"Exercice 3 : Mettre en pratique le trio JUnit, Mockito \u0026 AssertJ","anchor":"#exercice-3-mettre-en-pratique-le-trio-junit-mockito-assertj"},{"id":"correction-exercice-3","level":0,"title":"Correction exercice 3","anchor":"#correction-exercice-3"},{"id":"auto-valuation","level":0,"title":"Auto-évaluation","anchor":"#auto-valuation"},{"id":"conclusion-de-la-partie","level":0,"title":"Conclusion de la partie","anchor":"#conclusion-de-la-partie"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Chapitre 2 : Les Outils Essentiels du Testeur Java (L'essentiel) | Java Spring Test"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Java Spring Test Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/002-00-tools.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Chapitre 2 : Les Outils Essentiels du Testeur Java (L'essentiel) | Java Spring Test"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/002-00-tools.html#webpage",
+    "url": "writerside-documentation/002-00-tools.html",
+    "name": "Chapitre 2 : Les Outils Essentiels du Testeur Java (L'essentiel) | Java Spring Test",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Java Spring Test Help"
+}</script><!-- End Schema.org --></head><body data-id="002-00-tools" data-main-title="Chapitre 2 : Les Outils Essentiels du Testeur Java (L'essentiel)" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Java Spring Test  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="002-00-tools" id="002-00-tools.md">Chapitre 2 : Les Outils Essentiels du Testeur Java (L'essentiel)</h1><section class="chapter"><h2 id="objectifs-p-dagogiques" data-toc="objectifs-p-dagogiques">Objectifs p&eacute;dagogiques</h2><p id="a68084_12">&Agrave; la fin de cette partie, vous serez capable de :</p><ul class="list _bullet" id="a68084_13"><li class="list__item" id="a68084_14"><p id="a68084_19"><span class="control" id="a68084_20">&Eacute;crire</span> un test unitaire de base en utilisant JUnit 5.</p></li><li class="list__item" id="a68084_15"><p id="a68084_21"><span class="control" id="a68084_22">Ma&icirc;triser</span> le cycle de vie d'un test avec les annotations <code class="code" id="a68084_23">@BeforeEach</code>, <code class="code" id="a68084_24">@AfterEach</code>, etc.</p></li><li class="list__item" id="a68084_16"><p id="a68084_25"><span class="control" id="a68084_26">Isoler</span> votre code en cr&eacute;ant des &quot;mocks&quot; avec Mockito pour simuler les d&eacute;pendances.</p></li><li class="list__item" id="a68084_17"><p id="a68084_27"><span class="control" id="a68084_28">R&eacute;diger</span> des assertions claires, lisibles et puissantes gr&acirc;ce &agrave; AssertJ.</p></li><li class="list__item" id="a68084_18"><p id="a68084_29"><span class="control" id="a68084_30">&Eacute;viter</span> la duplication de code dans vos tests gr&acirc;ce aux tests param&eacute;tr&eacute;s.</p></li></ul></section><section class="chapter"><h2 id="introduction-votre-premi-re-caisse-outils" data-toc="introduction-votre-premi-re-caisse-outils">Introduction : Votre premi&egrave;re caisse &agrave; outils</h2><p id="a68084_31">Imaginez que vous deviez construire une maison. Dans le premier chapitre, nous avons &eacute;tudi&eacute; les plans (la pyramide), les r&egrave;gles de s&eacute;curit&eacute; (les principes FIRST) et la philosophie du chantier (l'agilit&eacute;). C'est indispensable, mais pour l'instant, vous n'avez aucun outil dans les mains. Impossible de planter le moindre clou.</p><p id="a68084_32">Ce chapitre vous livre votre premi&egrave;re caisse &agrave; outils de d&eacute;veloppeur professionnel. Nous n'allons pas d&eacute;couvrir des dizaines d'outils compliqu&eacute;s, mais trois outils fondamentaux, polyvalents et incroyablement puissants :</p><ul class="list _bullet" id="a68084_33"><li class="list__item" id="a68084_35"><p id="a68084_38"><span class="control" id="a68084_39">JUnit 5 :</span> Votre &eacute;tabli et votre terrain de jeu. C'est le framework qui ex&eacute;cute vos tests, les organise et vous donne les r&eacute;sultats.</p></li><li class="list__item" id="a68084_36"><p id="a68084_40"><span class="control" id="a68084_41">Mockito :</span> Votre ma&icirc;tre de l'illusion. C'est la biblioth&egrave;que qui vous permet de cr&eacute;er des faux objets (des &quot;mocks&quot;) pour isoler parfaitement le code que vous voulez tester.</p></li><li class="list__item" id="a68084_37"><p id="a68084_42"><span class="control" id="a68084_43">AssertJ :</span> Votre instrument de mesure de pr&eacute;cision. C'est la biblioth&egrave;que qui vous permet de v&eacute;rifier les r&eacute;sultats de vos tests de mani&egrave;re fluide et expressive.</p></li></ul><p id="a68084_34">Ensemble, ils forment le trio gagnant du test en Java. Pr&eacute;parez-vous &agrave; les installer et &agrave; les utiliser pour la premi&egrave;re fois.</p></section><section class="chapter"><h2 id="junit-5-votre-terrain-de-jeu-pour-les-tests" data-toc="junit-5-votre-terrain-de-jeu-pour-les-tests">JUnit 5 : Votre Terrain de Jeu pour les Tests</h2><p id="a68084_44">JUnit est LE standard de facto pour les tests en Java. La version 5 (surnomm&eacute;e Jupiter) est moderne, flexible et tr&egrave;s agr&eacute;able &agrave; utiliser.</p><section class="chapter"><h3 id="votre-premier-test-test" data-toc="votre-premier-test-test">Votre premier test : <code class="code" id="a68084_56">@Test</code></h3><p id="a68084_50">Tout commence par l'annotation <code class="code" id="a68084_57">@Test</code>. Elle signale &agrave; JUnit qu'une m&eacute;thode est une m&eacute;thode de test et qu'elle doit &ecirc;tre ex&eacute;cut&eacute;e.</p><p id="a68084_51">Prenons une classe m&eacute;tier tr&egrave;s simple, un calculateur.</p><div class="code-block" data-lang="java">
+// Fichier : fr/formation/spring/test/Calculator.java
+package fr.formation.spring.test;
+
+public class Calculator {
+    // Une méthode simple qui additionne deux entiers.
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+</div><p id="a68084_53">Maintenant, &eacute;crivons un test pour cette classe. Par convention, si la classe s'appelle <code class="code" id="a68084_58">Calculator</code>, la classe de test s'appellera <code class="code" id="a68084_59">CalculatorTest</code>.</p><div class="code-block" data-lang="java">
+// Fichier : src/test/java/fr/formation/spring/test/CalculatorTest.java
+package fr.formation.spring.test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+class CalculatorTest {
+
+    @Test
+    // Cette annotation rend le nom du test plus lisible dans les rapports.
+    @DisplayName(&quot;Devrait retourner 5 quand on additionne 2 et 3&quot;)
+    void shouldReturn5_whenAdding2And3() {
+        // Arrange : Préparer les objets et les données nécessaires.
+        Calculator calculator = new Calculator();
+        int a = 2;
+        int b = 3;
+
+        // Act : Appeler la méthode que l'on veut tester.
+        int result = calculator.add(a, b);
+
+        // Assert : Vérifier que le résultat est bien celui attendu.
+        Assertions.assertEquals(5, result, &quot;Le résultat de 2+3 devrait être 5&quot;);
+    }
+}
+</div><aside class="prompt" data-type="tip" data-title="" id="a68084_55"><p>La structure **Arrange-Act-Assert** (ou Given-When-Then en BDD) est une convention tr&egrave;s forte. Elle rend vos tests incroyablement lisibles : 1. **Arrange** : Je mets en place les conditions du test. 2. **Act** : J'ex&eacute;cute l'action &agrave; tester. 3. **Assert** : Je v&eacute;rifie le r&eacute;sultat.</p></aside></section><section class="chapter"><h3 id="le-cycle-de-vie-d-un-test" data-toc="le-cycle-de-vie-d-un-test">Le cycle de vie d'un test</h3><p id="a68084_60">Parfois, vous avez besoin de pr&eacute;parer un environnement avant chaque test (par exemple, cr&eacute;er une nouvelle instance d'un objet) et de le nettoyer apr&egrave;s. JUnit vous offre des annotations pour g&eacute;rer ce cycle de vie.</p><section class="procedure-steps"><h3 id="a68084_61" data-toc="a68084_61">Annotations de Cycle de Vie</h3><p id="a68084_62">Imaginez que vous pr&eacute;parez votre plan de travail :</p><ol class="list _decimal"><li class="list__item" id="a68084_63"><p><code class="code" id="a68084_68">@BeforeAll</code>: Une m&eacute;thode statique ex&eacute;cut&eacute;e <b id="a68084_69">une seule fois</b> avant tous les tests de la classe. (Ex: D&eacute;marrer une connexion &agrave; une base de donn&eacute;es de test).</p></li><li class="list__item" id="a68084_64"><p><code class="code" id="a68084_70">@BeforeEach</code>: Ex&eacute;cut&eacute;e <b id="a68084_71">avant chaque</b> m&eacute;thode <code class="code" id="a68084_72">@Test</code>. (Ex: Cr&eacute;er une nouvelle instance de la classe &agrave; tester pour garantir l'isolation).</p></li><li class="list__item" id="a68084_65"><p><code class="code" id="a68084_73">@Test</code>: Votre test.</p></li><li class="list__item" id="a68084_66"><p><code class="code" id="a68084_74">@AfterEach</code>: Ex&eacute;cut&eacute;e <b id="a68084_75">apr&egrave;s chaque</b> m&eacute;thode <code class="code" id="a68084_76">@Test</code>. (Ex: Nettoyer des fichiers temporaires).</p></li><li class="list__item" id="a68084_67"><p><code class="code" id="a68084_77">@AfterAll</code>: Une m&eacute;thode statique ex&eacute;cut&eacute;e <b id="a68084_78">une seule fois</b> apr&egrave;s tous les tests de la classe. (Ex: Fermer la connexion &agrave; la base de donn&eacute;es).</p></li></ol></section></section><section class="chapter"><h3 id="tester-les-erreurs-avec-assertthrows" data-toc="tester-les-erreurs-avec-assertthrows">Tester les erreurs avec <code class="code" id="a68084_82">assertThrows</code></h3><p id="a68084_80">Un bon test ne v&eacute;rifie pas que le cas &quot;heureux&quot;. Il v&eacute;rifie aussi que votre code r&eacute;agit correctement en cas d'erreur, par exemple en lan&ccedil;ant une exception.</p><div class="code-block" data-lang="java">
+// Ajoutons une méthode de division à notre Calculator
+public double divide(int a, int b) {
+    if (b == 0) {
+        throw new IllegalArgumentException(&quot;Le diviseur ne peut pas être zéro&quot;);
+    }
+    return (double) a / b;
+}
+
+// Et le test correspondant
+@Test
+@DisplayName(&quot;Devrait lancer une exception quand on divise par zéro&quot;)
+void shouldThrowException_whenDividingByZero() {
+    Calculator calculator = new Calculator();
+
+    // Assert : On vérifie qu'un appel à calculator.divide(10, 0)
+    // lance bien une exception de type IllegalArgumentException.
+    Assertions.assertThrows(IllegalArgumentException.class, () -&gt; {
+        calculator.divide(10, 0);
+    });
+}
+</div></section><section class="chapter"><h3 id="tests-param-tr-s-ne-vous-r-p-tez-pas" data-toc="tests-param-tr-s-ne-vous-r-p-tez-pas">Tests param&eacute;tr&eacute;s : Ne vous r&eacute;p&eacute;tez pas !</h3><p id="a68084_83">Imaginons que vous vouliez tester plusieurs cas pour la m&eacute;thode <code class="code" id="a68084_85">add</code>. Au lieu d'&eacute;crire 3 tests quasi identiques, vous pouvez &eacute;crire un seul test &quot;param&eacute;tr&eacute;&quot;.</p><div class="code-block" data-lang="java">
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+// ... dans la classe CalculatorTest
+
+@ParameterizedTest
+// Chaque chaîne est un jeu de données : 'input1, input2, expectedResult'
+@CsvSource({
+        &quot;1, 1, 2&quot;,
+        &quot;5, 5, 10&quot;,
+        &quot;-1, 1, 0&quot;,
+        &quot;100, 200, 300&quot;
+})
+@DisplayName(&quot;Additionne correctement plusieurs jeux de données&quot;)
+void shouldAddCorrectly_forMultipleValues(int a, int b, int expected) {
+    Calculator calculator = new Calculator();
+    int result = calculator.add(a, b);
+    Assertions.assertEquals(expected, result);
+}
+</div></section></section><section class="chapter"><h2 id="mockito-l-art-de-l-illusion-pour-des-tests-unitaires-purs" data-toc="mockito-l-art-de-l-illusion-pour-des-tests-unitaires-purs">Mockito : L'Art de l'Illusion pour des Tests Unitaires Purs</h2><p id="a68084_86">Le but d'un test unitaire est de tester une classe en <span class="control" id="a68084_94">total isolation</span>. Mais que faire si votre classe d&eacute;pend d'une autre, comme un service qui d&eacute;pend d'un repository pour acc&eacute;der &agrave; la base de donn&eacute;es ? Vous ne voulez pas d&eacute;pendre d'une vraie base de donn&eacute;es pour un test unitaire. C'est l&agrave; que Mockito entre en sc&egrave;ne.</p><p id="a68084_87">Mockito vous permet de cr&eacute;er une version &quot;factice&quot; de la d&eacute;pendance, un <span class="control" id="a68084_95">mock</span>.</p><p id="a68084_88">Imaginons un service qui g&eacute;n&egrave;re un rapport sur le nombre d'utilisateurs.</p><style>.theme-dark .plantuml > svg {filter: hue-rotate(180deg) invert(0.9);}div.plantuml {overflow-x: auto;}</style><div class="plantuml"><?xml version="1.0" encoding="us-ascii" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="218px" preserveAspectRatio="none" style="width:291px;height:218px;background:#FFFFFF;" version="1.1" viewBox="0 0 291 218" width="291px" zoomAndPan="magnify"><defs/><g><!--class UserRepository--><g id="elem_UserRepository"><rect codeLine="5" fill="#FFFFFF" height="61.0146" id="UserRepository" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="133" x="81.5" y="150.03"/><ellipse cx="94.5" cy="164.03" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M90.4277,159.7951 L90.4277,157.6369 L97.8071,157.6369 L97.8071,159.7951 L95.3418,159.7951 L95.3418,167.8718 L97.8071,167.8718 L97.8071,170.03 L90.4277,170.03 L90.4277,167.8718 L92.8931,167.8718 L92.8931,159.7951 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="105" x="106.5" y="169.5979">UserRepository</text><line style="stroke:#000000;stroke-width:1.0;" x1="82.5" x2="213.5" y1="178.03" y2="178.03"/><line style="stroke:#000000;stroke-width:1.0;" x1="82.5" x2="213.5" y1="186.03" y2="186.03"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="103" x="87.5" y="204.1052">+long count();</text></g><!--class ReportService--><g id="elem_ReportService"><rect codeLine="9" fill="#FFFFFF" height="78.0293" id="ReportService" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1.0;" width="272" x="12" y="12"/><ellipse cx="95.25" cy="26" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1.0;"/><path d="M98.2231,31.6431 Q97.6421,31.9419 97.0029,32.0913 Q96.3638,32.2407 95.6582,32.2407 Q93.1514,32.2407 91.8315,30.5889 Q90.5117,28.937 90.5117,25.8159 Q90.5117,22.6865 91.8315,21.0347 Q93.1514,19.3828 95.6582,19.3828 Q96.3638,19.3828 97.0112,19.5322 Q97.6587,19.6816 98.2231,19.9805 L98.2231,22.7031 Q97.5923,22.1221 96.9988,21.8523 Q96.4053,21.5825 95.7744,21.5825 Q94.4297,21.5825 93.7449,22.6492 Q93.0601,23.7158 93.0601,25.8159 Q93.0601,27.9077 93.7449,28.9744 Q94.4297,30.041 95.7744,30.041 Q96.4053,30.041 96.9988,29.7712 Q97.5923,29.5015 98.2231,28.9204 Z " fill="#000000"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="98" x="112.75" y="31.5679">ReportService</text><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="283" y1="40" y2="40"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="226" x="18" y="58.0752">-userRepository: UserRepository</text><line style="stroke:#000000;stroke-width:1.0;" x1="13" x2="283" y1="65.0146" y2="65.0146"/><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="260" x="18" y="83.0898">+generateUserCountReport(): String</text></g><!--reverse link ReportService to UserRepository--><g id="link_ReportService_UserRepository"><path codeLine="14" d="M148,102.27 C148,121.35 148,132.07 148,149.81 " fill="none" id="ReportService-backto-UserRepository" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="none" points="148,90.27,144,96.27,148,102.27,152,96.27,148,90.27" style="stroke:#000000;stroke-width:1.0;"/></g><!--SRC=[NSun3i8m30NGtQSmMojKYRbCY8cLYWE4o1IBrAaS1maGTwSfKplx__UziJiDX6DmB90UBADJDw0FBgM3cV8r6vryb8xVX3i05YEzEKzuIQHd6cDYY_h23o1kCKJfqSSiLjLx-0BC4fQSMaVwvAbPeWtcHRzTURFMav0wet8w5lJlL7MBtVIRz6LXQSUcMKa_]--></g></svg></div><div class="code-block" data-lang="java">
+// Fichier : fr/formation/spring/test/UserRepository.java
+package fr.formation.spring.test;
+
+public interface UserRepository {
+    long count(); // Simule un appel à la base de données
+}
+</div><div class="code-block" data-lang="java">
+// Fichier : fr/formation/spring/test/ReportService.java
+package fr.formation.spring.test;
+
+public class ReportService {
+    private final UserRepository userRepository;
+
+    public ReportService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    // La logique métier que nous voulons tester.
+    public String generateUserCountReport() {
+        long userCount = this.userRepository.count();
+        if (userCount == 0) {
+            return &quot;Aucun utilisateur trouvé.&quot;;
+        }
+        return &quot;Nombre d'utilisateurs : &quot; + userCount;
+    }
+}
+</div><p id="a68084_92">Pour tester <code class="code" id="a68084_96">ReportService</code>, nous devons <span class="control" id="a68084_97">mocker</span> <code class="code" id="a68084_98">UserRepository</code>.</p><div class="code-block" data-lang="java">
+// Fichier : src/test/java/fr/formation/spring/test/ReportServiceTest.java
+package fr.formation.spring.test;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.times;
+
+// Active l'intégration de Mockito avec JUnit 5
+@ExtendWith(MockitoExtension.class)
+class ReportServiceTest {
+
+    @Mock // Demande à Mockito de créer un mock de cette interface
+    private UserRepository mockUserRepository;
+
+    @InjectMocks // Crée une instance de ReportService et y injecte les mocks
+    private ReportService reportService;
+
+    @Test
+    void shouldReturnReport_whenUsersExist() {
+        // Arrange : On dit au mock comment se comporter.
+        // &quot;QUAND la méthode count() est appelée, ALORS retourne 50&quot;
+        when(mockUserRepository.count()).thenReturn(50L);
+
+        // Act : On appelle la méthode à tester.
+        String report = reportService.generateUserCountReport();
+
+        // Assert : On vérifie que le résultat est correct.
+        assertEquals(&quot;Nombre d'utilisateurs : 50&quot;, report);
+
+        // Verify (Optionnel mais puissant) : On vérifie que la méthode count()
+        // a bien été appelée sur notre mock, exactement 1 fois.
+        verify(mockUserRepository, times(1)).count();
+    }
+}
+</div></section><section class="chapter"><h2 id="assertj-crire-des-tests-qui-se-lisent-comme-des-phrases" data-toc="assertj-crire-des-tests-qui-se-lisent-comme-des-phrases">AssertJ : &Eacute;crire des Tests qui se Lisent comme des Phrases</h2><p id="a68084_99">Les assertions de base de JUnit sont fonctionnelles. Mais AssertJ les rend <span class="control" id="a68084_103">fluides</span>, plus lisibles et plus puissantes.</p><p id="a68084_100">Le principe est simple : toute assertion commence par <code class="code" id="a68084_104">assertThat(valeur_reelle)</code> et est suivie par une ou plusieurs conditions qui se lisent comme de l'anglais.</p><div class="tabs" id="a68084_101" data-anchors="[a68084_105]"><div class="tabs__content" data-gtm="tab" id="a68084_105" data-title="Comparaison JUnit vs. AssertJ"><div class="table-wrapper"><table class="wide" id="a68084_106"><thead><tr class="ijRowHead" id="a68084_107"><th id="a68084_114"><p>Cas de Test</p></th><th id="a68084_115"><p>Assertion JUnit</p></th><th id="a68084_116"><p>Assertion AssertJ (plus lisible)</p></th></tr></thead><tbody><tr id="a68084_108"><td id="a68084_117"><p>&Eacute;galit&eacute; simple</p></td><td id="a68084_118"><p><code class="code" id="a68084_120">assertEquals(5, result);</code></p></td><td id="a68084_119"><p><code class="code" id="a68084_121">assertThat(result).isEqualTo(5);</code></p></td></tr><tr id="a68084_109"><td id="a68084_122"><p>Vrai/Faux</p></td><td id="a68084_123"><p><code class="code" id="a68084_125">assertTrue(isValid);</code></p></td><td id="a68084_124"><p><code class="code" id="a68084_126">assertThat(isValid).isTrue();</code></p></td></tr><tr id="a68084_110"><td id="a68084_127"><p>Nullit&eacute;</p></td><td id="a68084_128"><p><code class="code" id="a68084_130">assertNull(user);</code></p></td><td id="a68084_129"><p><code class="code" id="a68084_131">assertThat(user).isNull();</code></p></td></tr><tr id="a68084_111"><td id="a68084_132"><p>Contenu d'une liste</p></td><td id="a68084_133"><p><code class="code" id="a68084_135">assertTrue(list.contains(&quot;Java&quot;));</code></p></td><td id="a68084_134"><p><code class="code" id="a68084_136">assertThat(list).contains(&quot;Java&quot;);</code></p></td></tr><tr id="a68084_112"><td id="a68084_137"><p>Taille d'une liste</p></td><td id="a68084_138"><p><code class="code" id="a68084_140">assertEquals(3, list.size());</code></p></td><td id="a68084_139"><p><code class="code" id="a68084_141">assertThat(list).hasSize(3);</code></p></td></tr><tr id="a68084_113"><td id="a68084_142"><p><span class="control" id="a68084_145">Cha&icirc;nage (la vraie puissance)</span></p></td><td id="a68084_143"><p><span class="emphasis" id="a68084_146">Difficile &agrave; faire en une ligne</span></p></td><td id="a68084_144"><p><code class="code" id="a68084_147">assertThat(list).hasSize(3).contains(&quot;Java&quot;).doesNotContain(&quot;C++&quot;);</code></p></td></tr></tbody></table></div></div></div><aside class="prompt" data-type="warning" data-title="" id="a68084_102"><p>Spring Boot inclut AssertJ par d&eacute;faut dans son `spring-boot-starter-test`. Vous n'avez m&ecirc;me pas &agrave; l'ajouter. Il est fortement recommand&eacute; de l'utiliser syst&eacute;matiquement pour la clart&eacute; de vos tests.</p></aside></section><section class="chapter"><h2 id="exercice-3-mettre-en-pratique-le-trio-junit-mockito-assertj" data-toc="exercice-3-mettre-en-pratique-le-trio-junit-mockito-assertj">Exercice 3 : Mettre en pratique le trio JUnit, Mockito &amp; AssertJ</h2><p id="a68084_148">Vous devez tester un <code class="code" id="a68084_154">InvoiceService</code> qui calcule le montant total d'une facture. La r&egrave;gle m&eacute;tier est la suivante : si le montant total des produits d&eacute;passe 100&euro;, une r&eacute;duction de 10% est appliqu&eacute;e.</p><p id="a68084_149">Voici le code de d&eacute;part :</p><div class="code-block" data-lang="java">
+// Fichier : fr/formation/spring/test/model/Product.java
+package fr.formation.spring.test.model;
+
+public class Product {
+    private String id;
+    private double price;
+    // ... constructeurs, getters
+}
+</div><div class="code-block" data-lang="java">
+// Fichier : fr.formation.spring.test.repository.ProductRepository.java
+package fr.formation.spring.test.repository;
+
+import fr.formation.spring.test.model.Product;
+import java.util.List;
+import java.util.Set;
+
+public interface ProductRepository {
+    // Trouve des produits par leurs IDs
+    List&lt;Product&gt; findAllById(Set&lt;String&gt; ids);
+}
+</div><div class="code-block" data-lang="java">
+// Fichier : fr.formation.spring.test.service.InvoiceService.java
+package fr.formation.spring.test.service;
+
+import fr.formation.spring.test.model.Product;
+import fr.formation.spring.test.repository.ProductRepository;
+import java.util.List;
+import java.util.Set;
+
+public class InvoiceService {
+    private final ProductRepository productRepository;
+    private static final double DISCOUNT_THRESHOLD = 100.0;
+    private static final double DISCOUNT_RATE = 0.90; // 10% de réduction
+
+    public InvoiceService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    public double calculateTotalAmount(Set&lt;String&gt; productIds) {
+        List&lt;Product&gt; products = productRepository.findAllById(productIds);
+        double total = products.stream().mapToDouble(Product::getPrice).sum();
+
+        if (total &gt; DISCOUNT_THRESHOLD) {
+            total *= DISCOUNT_RATE;
+        }
+        return total;
+    }
+}
+</div><p id="a68084_153"><span class="control" id="a68084_155">Votre mission :</span> &Eacute;crivez une classe de test <code class="code" id="a68084_156">InvoiceServiceTest</code> avec une m&eacute;thode qui teste le cas o&ugrave; la r&eacute;duction de 10% est appliqu&eacute;e. Utilisez JUnit pour la structure, Mockito pour mocker le <code class="code" id="a68084_157">ProductRepository</code>, et AssertJ pour les assertions.</p></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h2 id="correction-exercice-3" data-toc="correction-exercice-3">Correction exercice 3</h2></div><div class="collapse__content"><div class="code-block" data-lang="java">
+// Fichier : src/test/java/fr/formation/spring/test/service/InvoiceServiceTest.java
+package fr.formation.spring.test.service;
+
+import fr.formation.spring.test.model.Product;
+import fr.formation.spring.test.repository.ProductRepository;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
+import java.util.Set;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+
+@ExtendWith(MockitoExtension.class)
+class InvoiceServiceTest {
+
+    @Mock
+    private ProductRepository productRepository;
+
+    @InjectMocks
+    private InvoiceService invoiceService;
+
+    @Test
+    @DisplayName(&quot;Devrait appliquer une réduction de 10% si le total dépasse 100€&quot;)
+    void shouldApplyDiscount_whenTotalIsOver100() {
+        // Arrange : Préparation des données et du comportement du mock
+        Product product1 = new Product(&quot;p1&quot;, 80.0);
+        Product product2 = new Product(&quot;p2&quot;, 70.0);
+        // Le total (150€) est supérieur au seuil de 100€
+
+        Set&lt;String&gt; productIds = Set.of(&quot;p1&quot;, &quot;p2&quot;);
+        List&lt;Product&gt; productsFromRepo = List.of(product1, product2);
+
+        // On configure le mock : quand findAllById est appelé avec ce Set...
+        when(productRepository.findAllById(productIds))
+                .thenReturn(productsFromRepo); // ...il doit retourner cette liste.
+
+        // Act : Appel de la méthode à tester
+        double finalAmount = invoiceService.calculateTotalAmount(productIds);
+
+        // Assert : Vérification avec AssertJ
+        // 150 * 0.90 = 135
+        assertThat(finalAmount)
+                .isCloseTo(135.0, within(0.01)); // Préférable pour les doubles
+
+        // Verify : On s'assure que le repository a bien été appelé
+        verify(productRepository).findAllById(productIds);
+    }
+}
+</div></div></div></section><section class="chapter"><h2 id="auto-valuation" data-toc="auto-valuation">Auto-&eacute;valuation</h2><ol class="list _decimal" id="a68084_159" type="1"><li class="list__item" id="a68084_161"><p id="a68084_166">(Question ouverte) &Agrave; quoi sert l'annotation <code class="code" id="a68084_167">@BeforeEach</code> dans un test JUnit ?</p></li><li class="list__item" id="a68084_162"><p id="a68084_168">(QCM) Dans le contexte de Mockito, qu'est-ce qu'un &quot;mock&quot; ?</p><ul class="list _bullet" id="a68084_169"><li class="list__item" id="a68084_170"><p id="a68084_174">a) Une version r&eacute;elle d'une d&eacute;pendance.</p></li><li class="list__item" id="a68084_171"><p id="a68084_175">b) Un objet factice qui simule le comportement d'une d&eacute;pendance pour isoler le code test&eacute;.</p></li><li class="list__item" id="a68084_172"><p id="a68084_176">c) Une annotation pour marquer un test comme &eacute;tant lent.</p></li><li class="list__item" id="a68084_173"><p id="a68084_177">d) Une erreur dans un test.</p></li></ul></li><li class="list__item" id="a68084_163"><p id="a68084_178">(Question ouverte) Quel est le principal avantage d'utiliser AssertJ par rapport aux assertions standards de JUnit ?</p></li><li class="list__item" id="a68084_164"><p id="a68084_179">(QCM) Quelle annotation utiliser pour cr&eacute;er un test qui s'ex&eacute;cute avec plusieurs jeux de donn&eacute;es diff&eacute;rents ?</p><ul class="list _bullet" id="a68084_180"><li class="list__item" id="a68084_181"><p id="a68084_185">a) <code class="code" id="a68084_186">@Test</code></p></li><li class="list__item" id="a68084_182"><p id="a68084_187">b) <code class="code" id="a68084_188">@RepeatedTest</code></p></li><li class="list__item" id="a68084_183"><p id="a68084_189">c) <code class="code" id="a68084_190">@DisplayName</code></p></li><li class="list__item" id="a68084_184"><p id="a68084_191">d) <code class="code" id="a68084_192">@ParameterizedTest</code></p></li></ul></li><li class="list__item" id="a68084_165"><p id="a68084_193">(QCM) Quelle est la syntaxe correcte pour &quot;stuber&quot; (d&eacute;finir le comportement) d'une m&eacute;thode avec Mockito ?</p><ul class="list _bullet" id="a68084_194"><li class="list__item" id="a68084_195"><p id="a68084_199">a) <code class="code" id="a68084_200">mock.method().returns(&quot;value&quot;)</code></p></li><li class="list__item" id="a68084_196"><p id="a68084_201">b) <code class="code" id="a68084_202">when(mock.method()).thenReturn(&quot;value&quot;)</code></p></li><li class="list__item" id="a68084_197"><p id="a68084_203">c) <code class="code" id="a68084_204">given(mock.method()).is(&quot;value&quot;)</code></p></li><li class="list__item" id="a68084_198"><p id="a68084_205">d) <code class="code" id="a68084_206">let(mock.method()).be(&quot;value&quot;)</code></p></li></ul></li></ol><p id="a68084_160"><span class="emphasis" id="a68084_207">(Les corrections de l'auto-&eacute;valuation seront fournies &agrave; la toute fin du support de cours.)</span></p></section><section class="chapter"><h2 id="conclusion-de-la-partie" data-toc="conclusion-de-la-partie">Conclusion de la partie</h2><p id="a68084_208">Vous venez de faire un grand pas ! Vous n'&ecirc;tes plus un simple spectateur, vous &ecirc;tes un acteur du test. Vous avez en main les trois outils fondamentaux qui vous serviront tout au long de votre carri&egrave;re : <span class="control" id="a68084_210">JUnit</span> pour la structure, **Mockito ** pour l'isolation et <span class="control" id="a68084_211">AssertJ</span> pour la v&eacute;rification. Vous avez vu comment ils s'articulent pour cr&eacute;er des tests unitaires robustes, lisibles et efficaces.</p><p id="a68084_209">Dans la partie &quot;Pour aller plus loin&quot;, nous explorerons des fonctionnalit&eacute;s avanc&eacute;es de ces outils. Mais le plus excitant arrive ensuite : dans le prochain chapitre, nous verrons comment le framework Spring Boot prend ces outils et les int&egrave;gre de mani&egrave;re transparente, nous offrant des super-pouvoirs pour tester nos applications de mani&egrave;re encore plus simple et puissante.</p></section><div class="last-modified">16 juin 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="001-01-culture-and-strategy.html" class="navigation-links__prev">Chapitre 1 : Au-del&agrave; des Fondations : Culture et Strat&eacute;gies de Test (Pour aller plus loin)</a><a href="002-01-mastering-the-tools.html" class="navigation-links__next">Chapitre 2 : Ma&icirc;triser Votre Bo&icirc;te &agrave; Outils de Test (Pour aller plus loin)</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

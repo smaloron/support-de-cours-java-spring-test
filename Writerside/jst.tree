@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="jst"
+                 name="Java Spring Test"
+                 start-page="001-00-intro.md">
+
+    <toc-element topic="001-00-intro.md">
+        <toc-element topic="001-01-culture-and-strategy.md"/>
+    </toc-element>
+    <toc-element topic="002-00-tools.md">
+        <toc-element topic="002-01-mastering-the-tools.md"/>
+    </toc-element>
+    <toc-element topic="003-00-spring-boot-test.md">
+        <toc-element topic="003-01-advanced-conf.md"/>
+    </toc-element>
+    <toc-element topic="004-00-unit-test.md"/>
+    <toc-element topic="005-00-testing-rest.md"/>
+    <toc-element topic="006-00-database-testing.md"/>
+    <toc-element topic="007-00-integration-testing.md"/>
+    <toc-element topic="008-00-testcontainers.md"/>
+    <toc-element topic="009-00-integrating-secucrity.md"/>
+    <toc-element topic="010-00-async-test.md"/>
+    <toc-element topic="011-00-best-practices.md">
+        <toc-element topic="011-01-tdd.md"/>
+    </toc-element>
+    <toc-element topic="0012-00-conclusion.md">
+        <toc-element topic="012-01-corrections.md"/>
+    </toc-element>
+</instance-profile>

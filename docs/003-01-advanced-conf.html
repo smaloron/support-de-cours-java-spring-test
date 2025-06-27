@@ -1,0 +1,160 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-06-27T16:25:10.783908"><title>Chapitre 3 : Configurations Avanc&eacute;es et Contr&ocirc;le de l'Environnement de Test (Pour aller plus loin) | Java Spring Test</title><script type="application/json" id="virtual-toc-data">[{"id":"objectifs-p-dagogiques","level":0,"title":"Objectifs pédagogiques","anchor":"#objectifs-p-dagogiques"},{"id":"introduction-le-metteur-en-sc-ne-exigeant","level":0,"title":"Introduction : Le metteur en scène exigeant","anchor":"#introduction-le-metteur-en-sc-ne-exigeant"},{"id":"springboottest-plus-qu-une-simple-annotation","level":0,"title":"@SpringBootTest : Plus qu\u0027une simple annotation","anchor":"#springboottest-plus-qu-une-simple-annotation"},{"id":"personnaliser-le-contexte-de-test","level":0,"title":"Personnaliser le Contexte de Test","anchor":"#personnaliser-le-contexte-de-test"},{"id":"testpropertysource-injecter-des-configurations-la-vol-e","level":0,"title":"@TestPropertySource : Injecter des Configurations à la Volée","anchor":"#testpropertysource-injecter-des-configurations-la-vol-e"},{"id":"pr-parer-le-d-cor-l-annotation-sql","level":0,"title":"Préparer le Décor : L\u0027annotation @Sql","anchor":"#pr-parer-le-d-cor-l-annotation-sql"},{"id":"exercice-6-le-test-du-chef-d-orchestre","level":0,"title":"Exercice 6 : Le test du chef d\u0027orchestre","anchor":"#exercice-6-le-test-du-chef-d-orchestre"},{"id":"correction-exercice-6","level":0,"title":"Correction exercice 6","anchor":"#correction-exercice-6"},{"id":"auto-valuation","level":0,"title":"Auto-évaluation","anchor":"#auto-valuation"},{"id":"conclusion-de-la-partie","level":0,"title":"Conclusion de la partie","anchor":"#conclusion-de-la-partie"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><meta name="msapplication-TileColor" content="#000000"><link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Chapitre 3 : Configurations Avanc&eacute;es et Contr&ocirc;le de l'Environnement de Test (Pour aller plus loin) | Java Spring Test"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Java Spring Test Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/003-01-advanced-conf.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Chapitre 3 : Configurations Avanc&eacute;es et Contr&ocirc;le de l'Environnement de Test (Pour aller plus loin) | Java Spring Test"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/003-01-advanced-conf.html#webpage",
+    "url": "writerside-documentation/003-01-advanced-conf.html",
+    "name": "Chapitre 3 : Configurations Avanc&eacute;es et Contr&ocirc;le de l'Environnement de Test (Pour aller plus loin) | Java Spring Test",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Java Spring Test Help"
+}</script><!-- End Schema.org --></head><body data-id="003-01-advanced-conf" data-main-title="Chapitre 3 : Configurations Avancées et Contrôle de l'Environnement de Test (Pour aller plus loin)" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="003-00-spring-boot-test.md|Chapitre 3 : L'Intégration Transparente : Tester avec Spring Boot (L'essentiel)"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Java Spring Test  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="003-01-advanced-conf" id="003-01-advanced-conf.md">Chapitre 3 : Configurations Avancées et Contrôle de l'Environnement de Test (Pour aller plus loin)</h1><section class="chapter"><h2 id="objectifs-p-dagogiques" data-toc="objectifs-p-dagogiques">Objectifs p&eacute;dagogiques</h2><p id="z5u7whc_13">&Agrave; la fin de cette partie, vous serez en mesure de :</p><ul class="list _bullet" id="z5u7whc_14"><li class="list__item" id="z5u7whc_15"><p id="z5u7whc_20"><span class="control" id="z5u7whc_21">Ma&icirc;triser</span> diff&eacute;rentes strat&eacute;gies de chargement du contexte avec <code class="code" id="z5u7whc_22">@SpringBootTest</code>.</p></li><li class="list__item" id="z5u7whc_16"><p id="z5u7whc_23"><span class="control" id="z5u7whc_24">Personnaliser</span> le contexte d'application charg&eacute; pour un test avec <code class="code" id="z5u7whc_25">classes</code> et <code class="code" id="z5u7whc_26">@ContextConfiguration</code>.</p></li><li class="list__item" id="z5u7whc_17"><p id="z5u7whc_27"><span class="control" id="z5u7whc_28">Injecter</span> des valeurs de configuration dans vos tests en utilisant <code class="code" id="z5u7whc_29">@TestPropertySource</code>.</p></li><li class="list__item" id="z5u7whc_18"><p id="z5u7whc_30"><span class="control" id="z5u7whc_31">Comprendre</span> la diff&eacute;rence entre <code class="code" id="z5u7whc_32">@TestConfiguration</code> et <code class="code" id="z5u7whc_33">@Configuration</code> dans un contexte de test.</p></li><li class="list__item" id="z5u7whc_19"><p id="z5u7whc_34"><span class="control" id="z5u7whc_35">Initialiser</span> votre base de donn&eacute;es de test de mani&egrave;re d&eacute;clarative avec <code class="code" id="z5u7whc_36">@Sql</code>.</p></li></ul></section><section class="chapter"><h2 id="introduction-le-metteur-en-sc-ne-exigeant" data-toc="introduction-le-metteur-en-sc-ne-exigeant">Introduction : Le metteur en sc&egrave;ne exigeant</h2><p id="z5u7whc_37">Dans la partie pr&eacute;c&eacute;dente, vous avez appris &agrave; utiliser <code class="code" id="z5u7whc_40">@SpringBootTest</code> pour que votre &quot;&eacute;quipe de stand&quot; pr&eacute;pare la voiture pour la course. C'&eacute;tait simple et efficace : l'&eacute;quipe pr&eacute;parait syst&eacute;matiquement la voiture de la m&ecirc;me mani&egrave;re, avec tous les syst&egrave;mes activ&eacute;s.</p><p id="z5u7whc_38">Mais que se passe-t-il si, en tant que metteur en sc&egrave;ne, vous voulez tester une sc&egrave;ne tr&egrave;s sp&eacute;cifique ? Une sc&egrave;ne de nuit sous la pluie ? Une sc&egrave;ne o&ugrave; seul le moteur est test&eacute;, sans la carrosserie ? Vous n'avez pas besoin de toute l' &eacute;quipe ni de toute la pr&eacute;paration. Vous avez besoin d'un contr&ocirc;le plus fin sur l'environnement, les accessoires et les acteurs pr&eacute;sents.</p><p id="z5u7whc_39">Cette partie vous donne les outils du metteur en sc&egrave;ne. Vous apprendrez &agrave; ne charger que les parties de l'application dont vous avez besoin, &agrave; injecter des &quot;accessoires&quot; de configuration sp&eacute;cifiques (des propri&eacute;t&eacute;s), et &agrave; pr&eacute;parer le &quot; d&eacute;cor&quot; (votre base de donn&eacute;es) pour chaque sc&egrave;ne de test. Vous passerez du r&ocirc;le de pilote &agrave; celui de r&eacute;alisateur de vos tests.</p></section><section class="chapter"><h2 id="springboottest-plus-qu-une-simple-annotation" data-toc="springboottest-plus-qu-une-simple-annotation"><code class="code" id="z5u7whc_44">@SpringBootTest</code>: Plus qu'une simple annotation</h2><p id="z5u7whc_42">L'annotation <code class="code" id="z5u7whc_45">@SpringBootTest</code> est plus polyvalente qu'il n'y para&icirc;t. Son attribut <code class="code" id="z5u7whc_46">webEnvironment</code> vous permet de contr&ocirc;ler pr&eacute;cis&eacute;ment si et comment la partie web de votre application doit &ecirc;tre d&eacute;marr&eacute;e.</p><div class="tabs" id="z5u7whc_43" data-anchors="[z5u7whc_47,z5u7whc_48,z5u7whc_49,z5u7whc_50]"><div class="tabs__content" data-gtm="tab" id="z5u7whc_47" data-title="MOCK (d&eacute;faut)"><p id="z5u7whc_51"><code class="code" id="z5u7whc_54">@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)</code></p><p id="z5u7whc_52">C'est le comportement par d&eacute;faut. Le contexte de l'application est charg&eacute;, mais <b id="z5u7whc_55">le serveur web (Tomcat, Netty) n'est pas d&eacute;marr&eacute;</b>. Un environnement de servlet &quot;mock&quot; est fourni. C'est parfait pour les tests d'int&eacute;gration qui n'ont pas besoin de faire de vrais appels HTTP, mais qui n&eacute;cessitent les beans de la couche web.</p><p id="z5u7whc_53"><b id="z5u7whc_56">Quand l'utiliser ?</b> Pour la plupart des tests d'int&eacute;gration qui ne ciblent pas sp&eacute;cifiquement les contr&ocirc;leurs via des appels r&eacute;seau. C'est plus rapide.</p></div><div class="tabs__content" data-gtm="tab" id="z5u7whc_48" data-title="RANDOM_PORT"><p id="z5u7whc_57"><code class="code" id="z5u7whc_60">@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</code></p><p id="z5u7whc_58">Un serveur web <b id="z5u7whc_61">r&eacute;el est d&eacute;marr&eacute; et &eacute;coute sur un port al&eacute;atoire</b> disponible. C'est id&eacute;al pour des tests d'int&eacute;gration complets o&ugrave; vous voulez faire de vrais appels r&eacute;seau &agrave; votre propre application, sans risque de conflit de port si plusieurs processus de test tournent en parall&egrave;le.</p><p id="z5u7whc_59"><b id="z5u7whc_62">Quand l'utiliser ?</b> Pour les tests d'int&eacute;gration &quot;de bout en bout&quot; au sein d'un microservice.</p></div><div class="tabs__content" data-gtm="tab" id="z5u7whc_49" data-title="DEFINED_PORT"><p id="z5u7whc_63"><code class="code" id="z5u7whc_66">@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)</code></p><p id="z5u7whc_64">Similaire &agrave; `RANDOM_PORT`, mais le serveur d&eacute;marre sur le port d&eacute;fini dans votre `application.properties` (par exemple, `server.port=8080`).</p><p id="z5u7whc_65"><b id="z5u7whc_67">Quand l'utiliser ?</b> Moins courant, utile si vous avez un client de test externe qui est configur&eacute; pour appeler une URL fixe.</p></div><div class="tabs__content" data-gtm="tab" id="z5u7whc_50" data-title="NONE"><p id="z5u7whc_68"><code class="code" id="z5u7whc_71">@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)</code></p><p id="z5u7whc_69">Le contexte de l'application est charg&eacute;, mais <b id="z5u7whc_72">aucun environnement web</b> (ni r&eacute;el, ni mock) n'est cr&eacute;&eacute;. L'application ne s'ex&eacute;cute pas comme une application web.</p><p id="z5u7whc_70"><b id="z5u7whc_73">Quand l'utiliser ?</b> Pour tester des applications Spring qui ne sont pas des applications web (par exemple, des batchs, des applications en ligne de commande).</p></div></div></section><section class="chapter"><h2 id="personnaliser-le-contexte-de-test" data-toc="personnaliser-le-contexte-de-test">Personnaliser le Contexte de Test</h2><p id="z5u7whc_74">Charger toute l'application avec <code class="code" id="z5u7whc_77">@SpringBootTest</code> peut &ecirc;tre lent. Parfois, vous ne voulez tester qu'un petit sous-ensemble de votre application. L'attribut <code class="code" id="z5u7whc_78">classes</code> de <code class="code" id="z5u7whc_79">@SpringBootTest</code> est votre alli&eacute;. Il vous permet de sp&eacute;cifier manuellement quelles classes de configuration (<code class="code" id="z5u7whc_80">@Configuration</code>) ou quels composants (<code class="code" id="z5u7whc_81">@Component</code>, <code class="code" id="z5u7whc_82">@Service</code>...) doivent &ecirc;tre charg&eacute;s dans le contexte.</p><div class="code-block" data-lang="java">
+// On ne veut tester que l'interaction entre ces deux services,
+// sans charger les contrôleurs, la sécurité, etc.
+@SpringBootTest(classes = {GreeterService.class, TimeService.class})
+class LeanGreeterServiceTest {
+
+    @Autowired
+    private GreeterService greeterService;
+
+    // TimeService est aussi dans le contexte, on peut donc le mocker.
+    @MockBean
+    private TimeService mockTimeService;
+
+    // ... test
+}
+</div><aside class="prompt" data-type="warning" data-title="" id="z5u7whc_76"><p>**Soyez prudent !** En utilisant `classes`, vous prenez le contr&ocirc;le. Si `GreeterService` avait eu une autre d&eacute;pendance non d&eacute;clar&eacute;e, le contexte n'aurait pas pu d&eacute;marrer. C'est une technique puissante mais qui demande de bien conna&icirc;tre les d&eacute;pendances de ce que l'on teste.</p></aside></section><section class="chapter"><h2 id="testpropertysource-injecter-des-configurations-la-vol-e" data-toc="testpropertysource-injecter-des-configurations-la-vol-e"><code class="code" id="z5u7whc_89">@TestPropertySource</code>: Injecter des Configurations &agrave; la Vol&eacute;e</h2><p id="z5u7whc_84">Imaginez que vous ayez un service qui se comporte diff&eacute;remment selon une propri&eacute;t&eacute; dans votre <code class="code" id="z5u7whc_90">application.properties</code>.</p><div class="code-block" data-lang="java">
+
+@Service
+public class FeatureFlagService {
+    @Value(&quot;${features.new-algorithm.enabled:false}&quot;)
+    private boolean newAlgorithmEnabled;
+
+    public String getAlgorithm() {
+        return newAlgorithmEnabled ? &quot;Nouveau et Amélioré&quot; : &quot;Ancien et Fiable&quot;;
+    }
+}
+</div><p id="z5u7whc_86">Comment tester les deux cas sans cr&eacute;er deux fichiers de propri&eacute;t&eacute;s diff&eacute;rents ? Avec <code class="code" id="z5u7whc_91">@TestPropertySource</code>!</p><div class="code-block" data-lang="java">
+
+@SpringBootTest
+class FeatureFlagServiceTest {
+
+    @Nested
+    class WhenFeatureIsDisabled {
+        @Autowired
+        private FeatureFlagService featureFlagService;
+
+        @Test
+        void shouldUseOldAlgorithm() {
+            assertThat(featureFlagService.getAlgorithm())
+                    .isEqualTo(&quot;Ancien et Fiable&quot;);
+        }
+    }
+
+    @Nested
+    @TestPropertySource(properties = &quot;features.new-algorithm.enabled=true&quot;)
+    class WhenFeatureIsEnabled {
+        @Autowired
+        private FeatureFlagService featureFlagService;
+
+        @Test
+        void shouldUseNewAlgorithm() {
+            assertThat(featureFlagService.getAlgorithm())
+                    .isEqualTo(&quot;Nouveau et Amélioré&quot;);
+        }
+    }
+}
+</div><p id="z5u7whc_88">L'annotation <code class="code" id="z5u7whc_92">@TestPropertySource</code> surcharge les valeurs de <code class="code" id="z5u7whc_93">application.properties</code> pour la dur&eacute;e du test. C'est incroyablement pratique pour tester des &quot;feature flags&quot;, des configurations de timeouts, des URL externes, etc.</p></section><section class="chapter"><h2 id="pr-parer-le-d-cor-l-annotation-sql" data-toc="pr-parer-le-d-cor-l-annotation-sql">Pr&eacute;parer le D&eacute;cor : L'annotation <code class="code" id="z5u7whc_99">@Sql</code></h2><p id="z5u7whc_95">Lorsque l'on teste des services qui d&eacute;pendent de la base de donn&eacute;es, un des plus grands d&eacute;fis est de s'assurer que la base est dans un &eacute;tat connu et pr&eacute;visible avant chaque test. Plut&ocirc;t que d'ins&eacute;rer des donn&eacute;es manuellement en Java, vous pouvez utiliser des scripts SQL.</p><p id="z5u7whc_96">L'annotation <code class="code" id="z5u7whc_100">@Sql</code> de Spring Test vous permet d'ex&eacute;cuter des scripts SQL avant (et apr&egrave;s) vos m&eacute;thodes de test.</p><section class="procedure-steps"><h3 id="z5u7whc_97" data-toc="z5u7whc_97">Mise en place d'un test avec @Sql</h3><ul class="list _bullet"><li class="list__item" id="z5u7whc_101"><p>Cr&eacute;ez un fichier SQL dans <code class="code" id="z5u7whc_104">src/test/resources</code>. Par exemple, <code class="code" id="z5u7whc_105">/data/books-setup.sql</code>.</p></li></ul><div class="code-block" data-lang="sql">
+    -- src/test/resources/data/books-setup.sql
+    DELETE FROM book; -- On nettoie d'abord
+    INSERT INTO book (id, title, author, is_best_seller) VALUES
+    (1, 'La Pyramide des Tests', 'M. Testeur', false),
+    (2, 'Le Trophée des Tests', 'K.C. Dodds', true);
+    </div><div class="code-block" data-lang="none">&lt;step&gt;Créez un script pour le nettoyage (optionnel mais recommandé).&lt;/step&gt;
+&lt;code-block lang=&quot;sql&quot;&gt;
+-- src/test/resources/data/books-teardown.sql
+DELETE FROM book;
+&lt;/code-block&gt;
+
+&lt;step&gt;Annotez votre méthode de test.&lt;/step&gt;
+&lt;code-block lang=&quot;java&quot;&gt;
+@SpringBootTest
+// Pas de @MockBean pour le repository, on veut tester avec une vraie BDD
+class BookServiceIntegrationTest {
+
+    @Autowired
+    private BookService bookService;
+
+    @Test
+    @Sql(scripts = &quot;/data/books-setup.sql&quot;, 
+         executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = &quot;/data/books-teardown.sql&quot;, 
+         executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void shouldFindBestSeller_fromSqlData() {
+        String description = bookService.getBookDescription(&quot;Le Trophée des Tests&quot;);
+        assertThat(description).contains(&quot;[BEST-SELLER]&quot;);
+    }
+}
+&lt;/code-block&gt;
+</div></section><aside class="prompt" data-type="tip" data-title="" id="z5u7whc_98"><p>Utiliser `@Sql` rend vos tests beaucoup plus lisibles. L'&eacute;tat initial est d&eacute;crit de mani&egrave;re d&eacute;clarative, s&eacute;parant clairement la pr&eacute;paration des donn&eacute;es de la logique de test.</p></aside></section><section class="chapter"><h2 id="exercice-6-le-test-du-chef-d-orchestre" data-toc="exercice-6-le-test-du-chef-d-orchestre">Exercice 6 : Le test du chef d'orchestre</h2><p id="z5u7whc_106">Vous avez un service de notification qui envoie des alertes. Le canal de notification (EMAIL, SMS, PUSH) et le niveau de priorit&eacute; (NORMAL, URGENT) sont d&eacute;finis par des propri&eacute;t&eacute;s de configuration. Le service doit formater le message diff&eacute;remment en fonction de ces propri&eacute;t&eacute;s.</p><div class="code-block" data-lang="java">
+// fr.formation.spring.service.AlertService.java
+@Service
+public class AlertService {
+    private final String channel;
+    private final String priority;
+
+    public AlertService(@Value(&quot;${alert.channel:EMAIL}&quot;) String channel,
+                        @Value(&quot;${alert.priority:NORMAL}&quot;) String priority) {
+        this.channel = channel;
+        this.priority = priority;
+    }
+
+    public String sendAlert(String message) {
+        String finalMessage = String.format(&quot;[%s] %s: %s&quot;,
+                channel, priority, message);
+        // ... (logique d'envoi réelle)
+        return finalMessage;
+    }
+}
+</div><p id="z5u7whc_108"><span class="control" id="z5u7whc_110">Votre mission :</span> &Eacute;crivez une classe de test <code class="code" id="z5u7whc_111">AlertServiceTest</code> avec une m&eacute;thode qui v&eacute;rifie un cas de configuration sp&eacute;cifique :</p><ol class="list _decimal" id="z5u7whc_109" type="1"><li class="list__item" id="z5u7whc_112"><p id="z5u7whc_116">Utilisez <code class="code" id="z5u7whc_117">@SpringBootTest</code> pour ne charger que le <code class="code" id="z5u7whc_118">AlertService.class</code>.</p></li><li class="list__item" id="z5u7whc_113"><p id="z5u7whc_119">Utilisez <code class="code" id="z5u7whc_121">@TestPropertySource</code> pour forcer la configuration suivante :</p><ul class="list _bullet" id="z5u7whc_120"><li class="list__item" id="z5u7whc_122"><p id="z5u7whc_124"><code class="code" id="z5u7whc_125">alert.channel=SMS</code></p></li><li class="list__item" id="z5u7whc_123"><p id="z5u7whc_126"><code class="code" id="z5u7whc_127">alert.priority=URGENT</code></p></li></ul></li><li class="list__item" id="z5u7whc_114"><p id="z5u7whc_128">Injectez le <code class="code" id="z5u7whc_129">AlertService</code> et appelez sa m&eacute;thode <code class="code" id="z5u7whc_130">sendAlert</code>.</p></li><li class="list__item" id="z5u7whc_115"><p id="z5u7whc_131">Utilisez AssertJ pour v&eacute;rifier que le message retourn&eacute; est exactement <code class="code" id="z5u7whc_132">[SMS] URGENT: Panne syst&egrave;me imminente</code>.</p></li></ol></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h2 id="correction-exercice-6" data-toc="correction-exercice-6">Correction exercice 6</h2></div><div class="collapse__content"><div class="code-block" data-lang="java">
+// Fichier : src/test/java/fr/formation/spring/service/AlertServiceTest.java
+package fr.formation.spring.service;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@SpringBootTest(classes = AlertService.class)
+@TestPropertySource(properties = {
+        &quot;alert.channel=SMS&quot;,
+        &quot;alert.priority=URGENT&quot;
+})
+class AlertServiceTest {
+
+    @Autowired
+    private AlertService alertService;
+
+    @Test
+    @DisplayName(&quot;Devrait formater une alerte SMS urgente correctement&quot;)
+    void shouldFormatUrgentSmsAlert() {
+        // Arrange
+        String message = &quot;Panne système imminente&quot;;
+        String expectedFormat = &quot;[SMS] URGENT: Panne système imminente&quot;;
+
+        // Act
+        String result = alertService.sendAlert(message);
+
+        // Assert
+        assertThat(result).isEqualTo(expectedFormat);
+    }
+}
+</div></div></div></section><section class="chapter"><h2 id="auto-valuation" data-toc="auto-valuation">Auto-&eacute;valuation</h2><ol class="list _decimal" id="z5u7whc_134" type="1"><li class="list__item" id="z5u7whc_136"><p id="z5u7whc_141">(Question ouverte) Vous &eacute;crivez un test d'int&eacute;gration complet pour un contr&ocirc;leur REST et vous voulez faire un vrai appel HTTP dessus. Quel <code class="code" id="z5u7whc_142">webEnvironment</code> de <code class="code" id="z5u7whc_143">@SpringBootTest</code> est le plus appropri&eacute; et pourquoi ?</p></li><li class="list__item" id="z5u7whc_137"><p id="z5u7whc_144">(QCM) Quelle est la principale utilit&eacute; de l'annotation <code class="code" id="z5u7whc_146">@Sql</code>?</p><ul class="list _bullet" id="z5u7whc_145"><li class="list__item" id="z5u7whc_147"><p id="z5u7whc_151">a) Mocker la couche d'acc&egrave;s aux donn&eacute;es.</p></li><li class="list__item" id="z5u7whc_148"><p id="z5u7whc_152">b) Ex&eacute;cuter des scripts SQL pour initialiser et nettoyer l'&eacute;tat de la base de donn&eacute;es pour un test.</p></li><li class="list__item" id="z5u7whc_149"><p id="z5u7whc_153">c) Valider que le code SQL g&eacute;n&eacute;r&eacute; par JPA est correct.</p></li><li class="list__item" id="z5u7whc_150"><p id="z5u7whc_154">d) Injecter un <code class="code" id="z5u7whc_155">DataSource</code> dans le test.</p></li></ul></li><li class="list__item" id="z5u7whc_138"><p id="z5u7whc_156">(Question ouverte) Expliquez la diff&eacute;rence entre utiliser <code class="code" id="z5u7whc_157">@TestPropertySource</code> et d&eacute;finir des propri&eacute;t&eacute;s dans <code class="code" id="z5u7whc_158">src/test/resources/application-test.properties</code>. Dans quel cas utiliseriez-vous l'un plut&ocirc;t que l'autre ?</p></li><li class="list__item" id="z5u7whc_139"><p id="z5u7whc_159">(QCM) Si vous utilisez <code class="code" id="z5u7whc_161">@SpringBootTest(classes = { MyService.class })</code>, que se passera-t-il ?</p><ul class="list _bullet" id="z5u7whc_160"><li class="list__item" id="z5u7whc_162"><p id="z5u7whc_166">a) Le test ne compilera pas.</p></li><li class="list__item" id="z5u7whc_163"><p id="z5u7whc_167">b) L'application enti&egrave;re sera charg&eacute;e, mais seul <code class="code" id="z5u7whc_168">MyService</code> sera testable.</p></li><li class="list__item" id="z5u7whc_164"><p id="z5u7whc_169">c) Seul <code class="code" id="z5u7whc_170">MyService</code> et ses d&eacute;pendances directes et transitives seront charg&eacute;s dans le contexte de test.</p></li><li class="list__item" id="z5u7whc_165"><p id="z5u7whc_171">d) Spring cr&eacute;era un contexte de test contenant uniquement le bean <code class="code" id="z5u7whc_172">MyService</code>, et le test &eacute;chouera si <code class="code" id="z5u7whc_173">MyService</code> a des d&eacute;pendances.</p></li></ul></li><li class="list__item" id="z5u7whc_140"><p id="z5u7whc_174">(QCM) Vous mettez une annotation <code class="code" id="z5u7whc_176">@Configuration</code> sur une classe interne dans votre test. Quel est l'effet ?</p><ul class="list _bullet" id="z5u7whc_175"><li class="list__item" id="z5u7whc_177"><p id="z5u7whc_181">a) Elle sera ignor&eacute;e par Spring.</p></li><li class="list__item" id="z5u7whc_178"><p id="z5u7whc_182">b) Elle sera utilis&eacute;e pour ajouter ou modifier des beans dans le contexte principal de l'application pour ce test.</p></li><li class="list__item" id="z5u7whc_179"><p id="z5u7whc_183">c) Elle est &eacute;quivalente &agrave; <code class="code" id="z5u7whc_184">@TestConfiguration</code>.</p></li><li class="list__item" id="z5u7whc_180"><p id="z5u7whc_185">d) Elle lancera une exception car <code class="code" id="z5u7whc_186">@Configuration</code> n'est pas permis dans les tests.</p></li></ul></li></ol><p id="z5u7whc_135"><span class="emphasis" id="z5u7whc_187">(Les corrections de l'auto-&eacute;valuation seront fournies &agrave; la toute fin du support de cours.)</span></p></section><section class="chapter"><h2 id="conclusion-de-la-partie" data-toc="conclusion-de-la-partie">Conclusion de la partie</h2><p id="z5u7whc_188">Vous &ecirc;tes maintenant un metteur en sc&egrave;ne accompli ! Vous ne vous contentez plus d'accepter l'environnement de test par d&eacute;faut. Vous savez comment le <span class="control" id="z5u7whc_191">sculpter</span> &agrave; vos besoins : d&eacute;marrer un vrai serveur web ou non, charger uniquement les acteurs (<code class="code" id="z5u7whc_192">classes</code>) pertinents pour votre sc&egrave;ne, leur donner des accessoires sp&eacute;cifiques (<code class="code" id="z5u7whc_193">@TestPropertySource</code>) et pr&eacute;parer le d&eacute;cor (<code class="code" id="z5u7whc_194">@Sql</code>).</p><p id="z5u7whc_189">Cette ma&icirc;trise du contexte est cruciale. Elle vous permet d'&eacute;crire des tests plus rapides, plus cibl&eacute;s et plus robustes. Elle vous donne la confiance n&eacute;cessaire pour tester des interactions complexes dans des conditions parfaitement contr&ocirc;l&eacute;es.</p><p id="z5u7whc_190">Arm&eacute;s de cette connaissance approfondie, nous sommes pr&ecirc;ts &agrave; aborder la sp&eacute;cialisation. Dans les prochains chapitres, nous allons nous concentrer sur des &quot;tranches&quot; sp&eacute;cifiques de l'application et d&eacute;couvrir les outils que Spring Boot nous offre pour les tester de mani&egrave;re optimale : d'abord la couche de service et la logique m&eacute;tier, puis la couche web et enfin la couche de persistance. L'aventure continue</p></section><div class="last-modified">16 juin 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="003-00-spring-boot-test.html" class="navigation-links__prev">Chapitre 3 : L'Int&eacute;gration Transparente : Tester avec Spring Boot (L'essentiel)</a><a href="004-00-unit-test.html" class="navigation-links__next">Chapitre 4 : Tester le C&oelig;ur de l'Application : Les Services (L'essentiel)</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>
