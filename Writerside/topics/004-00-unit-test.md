@@ -1,4 +1,4 @@
-# Chapitre 4 : Tester le Cœur de l'Application : Les Services (L'essentiel)
+# Chapitre 4 : Tester le Cœur de l'Application : Les Services
 
 ### Objectifs pédagogiques
 

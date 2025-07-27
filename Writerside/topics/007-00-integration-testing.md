@@ -1,4 +1,4 @@
-# Chapitre 7 : L'Épreuve du Feu : Tests d'Intégration Complets (L'essentiel)
+# Chapitre 7 : L'Épreuve du Feu : Tests d'Intégration Complets
 
 ### Objectifs pédagogiques
 

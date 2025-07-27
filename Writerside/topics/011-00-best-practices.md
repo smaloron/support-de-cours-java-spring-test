@@ -30,8 +30,9 @@ Le nom de votre méthode de test est la première chose que vous verrez quand un
 complète et sans ambiguïté.
 
 <tabs>
-<tab title="Mauvais Nommage ❌">
+<tab title="Mauvaise Nomenclature ❌">
 <p>Noms vagues, techniques, qui ne disent pas l'intention.</p>
+
 <pre><code lang="java">
 @Test
 void test1() { ... }
@@ -44,7 +45,7 @@ void testError() { ... }
 </code></pre>
 <p>Si <code>testError</code> échoue, quelle erreur ? Dans quelles conditions ? Vous devez lire tout le code pour comprendre.</p>
 </tab>
-<tab title="Bon Nommage ✅">
+<tab title="Bonne Nomenclature ✅">
 <p>Une convention populaire est <b><code>methodName_shouldXXX_whenYYY</code></b>. Elle décrit l'action, le résultat attendu et le contexte.</p>
 <pre><code lang="java">
 @Test
@@ -210,6 +211,12 @@ des rapports visuels.
 !theme plain
 title Rapport de Couverture de Code (JaCoCo)
 
+legend 
+  <color:LightGreen> Vert </color> : Ligne couverte par au moins un test.
+  <color:Tomato> Rouge </color> : Ligne non couverte.
+  <color:Yellow> Jaune </color> : Branche partiellement couverte (ex: un if sans le else).
+end legend
+
 package "Classe MyService.java" {
   rectangle "Ligne 1: `if (value > 10) {`" #LightGreen
   rectangle "Ligne 2: `  return a;`" #LightGreen
@@ -217,12 +224,6 @@ package "Classe MyService.java" {
   rectangle "Ligne 4: `  return b;`" #Tomato
   rectangle "Ligne 5: `}`" #LightGreen
 }
-
-legend 
-  <color:LightGreen> Vert </color> : Ligne couverte par au moins un test.
-  <color:Tomato> Rouge </color> : Ligne non couverte.
-  <color:Yellow> Jaune </color> : Branche partiellement couverte (ex: un if sans le else).
-end legend
 @enduml
 ```
 

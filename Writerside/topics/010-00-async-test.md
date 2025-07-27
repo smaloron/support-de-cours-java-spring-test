@@ -1,4 +1,4 @@
-# Chapitre 10 : Le Test dans une Autre Dimension : Code Asynchrone et Réactif (L'essentiel)
+# Chapitre 10 : Le Test dans une Autre Dimension : Code Asynchrone et Réactif
 
 ### Objectifs pédagogiques
 
@@ -339,7 +339,7 @@ class InMemoryEmailServiceTest {
 
 Vous avez apprivoisé le temps ! Vous savez maintenant que le code asynchrone n'est pas une boîte noire impossible à
 tester. Grâce à **Awaitility**, vous pouvez écrire des tests robustes et lisibles pour vos méthodes `@Async`, en
-attendant patiemment mais intelligemment que le travail soit fait.
+attendant patiemment, mais intelligemment que le travail soit fait.
 
 Vous avez également fait vos premiers pas dans le monde de la programmation réactive, en apprenant à tester les deux
 facettes de ce paradigme : la couche web avec **`WebTestClient`** et la logique métier avec **`StepVerifier`**.

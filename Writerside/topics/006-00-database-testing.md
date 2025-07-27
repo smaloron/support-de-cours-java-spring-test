@@ -1,4 +1,4 @@
-# Chapitre 6 : Tester les Fondations : La Couche d'Accès aux Données (L'essentiel)
+# Chapitre 6 : Tester les Fondations : La Couche d'Accès aux Données
 
 ### Objectifs pédagogiques
 

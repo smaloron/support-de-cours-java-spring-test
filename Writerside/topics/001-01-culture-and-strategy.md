@@ -65,9 +65,10 @@ Le TDD et le BDD ne s'opposent pas, ils se complètent ! Le BDD aide à définir
 
 ### "Shift Left" : Tester Plus Tôt, Tester Mieux
 
-Le "Shift Left" (décalage à gauche) est une idée simple mais révolutionnaire. Si vous imaginez la ligne de temps d'un
+Le "Shift Left" (décalage à gauche) est une idée simple, mais révolutionnaire. Si vous imaginez la ligne de temps d'un
 projet de gauche (conception) à droite (production), le "Shift Left" consiste à **déplacer les activités de test le plus
 tôt possible dans le processus**.
+
 
 ```plantuml
 @startuml

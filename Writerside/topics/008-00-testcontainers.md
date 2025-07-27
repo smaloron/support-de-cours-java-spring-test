@@ -1,4 +1,4 @@
-# Chapitre 8 : Le Test en Conditions Réelles : Gérer les Dépendances Externes avec Testcontainers (L'essentiel)
+# Chapitre 8 : Le Test en Conditions Réelles : Gérer les Dépendances Externes avec Testcontainers
 
 ### Objectifs pédagogiques
 

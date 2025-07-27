@@ -1,4 +1,4 @@
-# Chapitre 5 : Tester la Façade : Les Contrôleurs REST (L'essentiel)
+# Chapitre 5 : Tester la Façade : Les Contrôleurs REST
 
 ### Objectifs pédagogiques
 

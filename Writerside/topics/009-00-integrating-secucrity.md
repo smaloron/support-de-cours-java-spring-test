@@ -1,4 +1,4 @@
-# Chapitre 9 : Tester Sous Haute Surveillance : Intégrer Spring Security (L'essentiel)
+# Chapitre 9 : Tester Sous Haute Surveillance : Intégrer Spring Security
 
 ### Objectifs pédagogiques
 
