@@ -64,29 +64,40 @@ Pour réaliser un test d'intégration complet, nous allons combiner plusieurs é
 title "Test d'Intégration Complet"
 
 node "Machine de Test" {
-  
-  package "Classe de Test" {
-    [MonIntegrationTest]
-  }
 
-  package "Client HTTP" {
-    [TestRestTemplate]
-  }
+package "Classe de Test" {
+component [MonIntegrationTest]
+}
 
-  package "Application Spring Boot" #LightGreen {
-    [Controller] <--> [Service] <--> [Repository]
-  }
+package "Client HTTP" {
+component [TestRestTemplate]
+}
 
-  package "Serveur Web (Tomcat)" {
-  }
+package "Application Spring Boot" #LightGreen {
+' D'abord, on déclare les composants
+component [Controller]
+component [Service]
+component [Repository]
 
-  package "Base de Données (H2)" {
-  }
+' Ensuite, on définit chaque relation sur sa propre ligne.
+[Controller] <--> [Service]
+[Service] <--> [Repository]
 
-  [MonIntegrationTest] ..> [TestRestTemplate] : utilise
-  [TestRestTemplate] ..> [Serveur Web (Tomcat)] : Appel HTTP réel (localhost:random_port)
-  [Serveur Web (Tomcat)] ..> [Controller] : Transmet la requête
-  [Repository] ..> [Base de Données (H2)] : Lit/Écrit
+}
+
+package "Serveur Web (Tomcat)" {
+component [Serveur Web]
+}
+
+package "Base de Données (H2)" {
+component [BDD (H2)]
+}
+
+' Les relations inter-packages sont définies ici
+[MonIntegrationTest] ..> [TestRestTemplate] : utilise
+[TestRestTemplate] ..> [Serveur Web (Tomcat)] : Appel HTTP réel (localhost:random_port)
+[Serveur Web (Tomcat)] ..> [Controller] : Transmet la requête
+[Repository] ..> [Base de Données (H2)] : Lit/Écrit
 }
 @enduml
 ```

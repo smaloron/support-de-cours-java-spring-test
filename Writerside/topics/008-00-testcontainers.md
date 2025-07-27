@@ -84,15 +84,16 @@ Intégrer Testcontainers est étonnamment simple.
 
 <step><b>Déclarer votre conteneur</b></step>
     <p>Créez un champ statique pour votre conteneur et annotez-le avec <code>@Container</code>. Le rendre <code>static</code> est une optimisation cruciale : le conteneur sera démarré une seule fois pour toute la classe de test, et non avant chaque méthode.</p>
-    <code-block lang="java">
+
+```java
     @Testcontainers
     class MyRepositoryTest {
         @Container
-        static PostgreSQLContainer&lt;?&gt; postgresqlContainer = 
+        static PostgreSQLContainer<>; postgresqlContainer = 
             new PostgreSQLContainer<>("postgres:15-alpine");
         // ...
     }
-    </code-block>
+```
 
 </procedure>
 

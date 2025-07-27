@@ -69,43 +69,7 @@ Le "Shift Left" (décalage à gauche) est une idée simple, mais révolutionnair
 projet de gauche (conception) à droite (production), le "Shift Left" consiste à **déplacer les activités de test le plus
 tôt possible dans le processus**.
 
-
-```plantuml
-@startuml
-!theme vibrant
-title "Shift Left" : Intégrer la Qualité en Amont
-
-scale 1.5
-
-[*] --> "Conception"
-"Conception" --> "Développement"
-"Développement" --> "Tests (Phase)"
-"Tests (Phase)" --> "Déploiement"
-"Déploiement" --> [*]
-note right of "Tests (Phase)": Approche Traditionnelle\nLe test est une étape tardive.
-
---
-
-[*] --> "Conception"
-"Conception" : Tests
-note left: Revues de design,\nSpécifications (BDD)
-
-"Conception" --> "Développement"
-"Développement" : Tests
-note left: TDD, Tests Unitaires,\nAnalyse statique, Pair programming
-
-"Développement" --> "Déploiement"
-"Déploiement" : Tests
-note left: Tests d'intégration continue,\nMonitoring
-
-"Déploiement" --> [*]
-
-note at top
-  <b>Approche "Shift Left"</b>
-  Le test est une <u>activité continue</u>.
-end note
-@enduml
-```
+![shift-left.png](shift-left.png)
 
 Pourquoi faire cela ? On revient au coût de la non-qualité :
 

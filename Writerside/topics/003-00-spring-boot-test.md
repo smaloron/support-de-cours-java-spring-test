@@ -222,8 +222,8 @@ Spring offre plusieurs moyens d'adapter la configuration pour les tests.
 <tab title="application-test.properties">
     <p>Le moyen le plus simple. Si vous créez un fichier <code>src/test/resources/application-test.properties</code> (ou <code>.yml</code>), Spring Boot le chargera automatiquement pour les tests.</p>
     <p>C'est l'endroit idéal pour configurer une base de données en mémoire comme H2.</p>
-    <pre>
-<code lang="properties">
+
+```properties
     # Configuration pour la base de données de test
     spring.datasource.url=jdbc:h2:mem:testdb
     spring.datasource.driverClassName=org.h2.Driver
@@ -232,8 +232,7 @@ Spring offre plusieurs moyens d'adapter la configuration pour les tests.
 
     # Force la création du schéma à chaque fois
     spring.jpa.hibernate.ddl-auto=create-drop
-</code>
-</pre>
+```
 
 </tab>
 <tab title="@ActiveProfiles">
@@ -251,8 +250,8 @@ Spring offre plusieurs moyens d'adapter la configuration pour les tests.
 <tab title="@TestConfiguration">
     <p>Parfois, vous voulez définir un bean spécifique <i>uniquement</i> pour un test ou une classe de test. C'est le rôle de <code>@TestConfiguration</code>.</p>
     <p>Un bean défini ici ne remplacera pas un bean existant, mais sera ajouté au contexte. C'est parfait pour fournir des beans utilitaires pour les tests.</p>
-    <pre>
-<code lang="java">
+
+```java
     @SpringBootTest
     class MyTimeSensitiveTest {
 
@@ -274,8 +273,7 @@ Spring offre plusieurs moyens d'adapter la configuration pour les tests.
         
         // ... tests qui utilisent ce "clock" prévisible ...
     }
-</code>
-</pre>
+```
 
 </tab>
 </tabs>

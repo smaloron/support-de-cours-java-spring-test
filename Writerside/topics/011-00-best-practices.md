@@ -33,7 +33,7 @@ complète et sans ambiguïté.
 <tab title="Mauvaise Nomenclature ❌">
 <p>Noms vagues, techniques, qui ne disent pas l'intention.</p>
 
-<pre><code lang="java">
+```java
 @Test
 void test1() { ... }
 
@@ -42,12 +42,14 @@ void testGetUser() { ... }
 
 @Test
 void testError() { ... }
-</code></pre>
+```
+
 <p>Si <code>testError</code> échoue, quelle erreur ? Dans quelles conditions ? Vous devez lire tout le code pour comprendre.</p>
 </tab>
 <tab title="Bonne Nomenclature ✅">
 <p>Une convention populaire est <b><code>methodName_shouldXXX_whenYYY</code></b>. Elle décrit l'action, le résultat attendu et le contexte.</p>
-<pre><code lang="java">
+
+```java
 @Test
 void findById_shouldReturnUser_whenUserExists() { ... }
 
@@ -57,7 +59,8 @@ void findById_shouldReturnEmpty_whenUserDoesNotExist() { ... }
 @Test
 @DisplayName("Doit lancer une exception si le solde est insuffisant") // Encore mieux !
 void withdraw_shouldThrowException_whenBalanceIsInsufficient() { ... }
-</code></pre>
+```
+
 <p>Le nom du test est auto-documenté. L'intention est limpide.</p>
 </tab>
 </tabs>
