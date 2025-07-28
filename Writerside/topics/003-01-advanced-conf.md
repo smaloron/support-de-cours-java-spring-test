@@ -154,32 +154,33 @@ L'annotation `@Sql` de Spring Test vous permet d'exécuter des scripts SQL avant
     (2, 'Le Trophée des Tests', 'K.C. Dodds', true);
     </code-block>
 
-    <step>Créez un script pour le nettoyage (optionnel mais recommandé).</step>
-    <code-block lang="sql">
-    -- src/test/resources/data/books-teardown.sql
-    DELETE FROM book;
-    </code-block>
-    
-    <step>Annotez votre méthode de test.</step>
-    <code-block lang="java">
-    @SpringBootTest
-    // Pas de @MockBean pour le repository, on veut tester avec une vraie BDD
-    class BookServiceIntegrationTest {
+<step>Créez un script pour le nettoyage (optionnel mais recommandé).</step>
+<code-block lang="sql">
+-- src/test/resources/data/books-teardown.sql
+DELETE FROM book;
+</code-block>
 
-        @Autowired
-        private BookService bookService;
+<step>Annotez votre méthode de test.</step>
 
-        @Test
-        @Sql(scripts = "/data/books-setup.sql", 
-             executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-        @Sql(scripts = "/data/books-teardown.sql", 
-             executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-        void shouldFindBestSeller_fromSqlData() {
-            String description = bookService.getBookDescription("Le Trophée des Tests");
-            assertThat(description).contains("[BEST-SELLER]");
-        }
+```java
+@SpringBootTest
+// Pas de @MockBean pour le repository, on veut tester avec une vraie BDD
+class BookServiceIntegrationTest {
+
+    @Autowired
+    private BookService bookService;
+
+    @Test
+    @Sql(scripts = "/data/books-setup.sql", 
+         executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/data/books-teardown.sql", 
+         executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+    void shouldFindBestSeller_fromSqlData() {
+        String description = bookService.getBookDescription("Le Trophée des Tests");
+        assertThat(description).contains("[BEST-SELLER]");
     }
-    </code-block>
+}
+```
 
 </procedure>
 

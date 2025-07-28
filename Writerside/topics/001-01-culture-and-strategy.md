@@ -43,19 +43,18 @@ Vous avez déjà entendu parler de TDD et BDD. Ils sont souvent mentionnés ense
     <p>Le BDD est un <b>processus de collaboration</b>. C'est une conversation entre les développeurs, les testeurs (QA), et les experts métier (Product Owners) pour s'assurer que tout le monde a une compréhension partagée du comportement attendu du logiciel du point de vue de l'utilisateur.</p>
     <p>Le BDD utilise un langage structuré, quasi naturel, appelé <b>Gherkin</b>, avec la syntaxe <code>Given-When-Then</code> (Étant donné-Quand-Alors).</p>
     <p><b>Exemple :</b> Pour une fonctionnalité de retrait d'argent.</p>
-    <pre>
-    <b>Fonctionnalité:</b> Retrait d'argent depuis un distributeur
 
-    <b>Scénario:</b> Le compte est suffisamment approvisionné
-      <b>Étant donné que</b> le solde de mon compte est de 100€
-      <b>Et que</b> le distributeur contient de l'argent
-      <b>Quand</b> je demande 20€
-      <b>Alors</b> le distributeur doit me donner 20€
-      <b>Et</b> le solde de mon compte doit être de 80€
-    </pre>
-    <p>Ces scénarios sont la "source de vérité". Ils peuvent ensuite être automatisés pour devenir des tests (souvent d'intégration ou E2E).</p>
-    <p>Le BDD est centré sur la <b>collaboration</b> et le <b>comportement externe</b> de l'application.</p>
+<p><b>Fonctionnalité:</b> Retrait d'argent depuis un distributeur</p>
 
+<b>Scénario: </b> Le compte est suffisamment approvisionné <br/>
+  <b>Étant donné que</b> le solde de mon compte est de 100€
+  <b>Et que</b> le distributeur contient de l'argent
+  <b>Quand</b> je demande 20€
+  <b>Alors</b> le distributeur doit me donner 20€
+  <b>Et</b> le solde de mon compte doit être de 80€
+
+<p>Ces scénarios sont la "source de vérité". Ils peuvent ensuite être automatisés pour devenir des tests (souvent d'intégration ou E2E).</p>
+<p>Le BDD est centré sur la <b>collaboration</b> et le <b>comportement externe</b> de l'application.</p>
 </tab>
 </tabs>
 
