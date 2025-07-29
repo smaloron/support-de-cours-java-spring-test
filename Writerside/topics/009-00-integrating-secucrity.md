@@ -111,7 +111,9 @@ Imaginons un `AdminController` qui ne devrait être accessible qu'aux administra
 @EnableWebSecurity
 public class SecurityConfig {
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http
+    ) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/admin/**").hasRole("ADMIN") // Seuls les admins
@@ -121,7 +123,29 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
-    // ... bean pour le UserDetailsService, PasswordEncoder etc.
+
+   @Bean
+   public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+      // Création d'un utilisateur standard
+      UserDetails user = User.withUsername("user")
+              .password(passwordEncoder.encode("password123"))
+              .roles("USER")
+              .build();
+
+      // Création d'un utilisateur administrateur
+      UserDetails admin = User.withUsername("admin")
+              .password(passwordEncoder.encode("admin123"))
+              .roles("ADMIN", "USER") 
+              .build();
+      
+      return new InMemoryUserDetailsManager(user, admin);
+   }
+   
+   @Bean
+   public PasswordEncoder passwordEncoder() {
+      return new BCryptPasswordEncoder();
+   }
+
 }
 ```
 
