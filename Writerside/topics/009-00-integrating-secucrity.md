@@ -49,44 +49,48 @@ une méthode de test (ou sur la classe pour s'appliquer à tous les tests) et cr
 <procedure title="Scénarios de test avec @WithMockUser">
     <step><b>Simuler un utilisateur simple</b></step>
     <p>Le plus simple : simuler un utilisateur nommé "user" avec un mot de passe "password" et un rôle "USER".</p>
-    <code-block lang="java">
+    
+```java
     @Test
     @WithMockUser
     void testEndpointForAnyLoggedInUser() throws Exception {
         mockMvc.perform(get("/api/profile"))
                .andExpect(status().isOk());
     }
-    </code-block>
+```
 
-    <step><b>Simuler un utilisateur avec un nom spécifique</b></step>
-    <code-block lang="java">
-    @Test
-    @WithMockUser(username = "alex.dev")
-    void testEndpointAsSpecificUser() throws Exception {
-        // ...
-    }
-    </code-block>
+<step><b>Simuler un utilisateur avec un nom spécifique</b></step>
+
+```java
+@Test
+@WithMockUser(username = "alex.dev")
+void testEndpointAsSpecificUser() throws Exception {
+    // ...
+}
+```
     
-    <step><b>Simuler un utilisateur avec des rôles spécifiques</b></step>
-    <p>C'est le cas le plus courant pour tester les autorisations.</p>
-    <code-block lang="java">
-    @Test
-    @WithMockUser(roles = {"ADMIN", "AUDITOR"})
-    void testEndpointForAdminAndAuditor() throws Exception {
-        mockMvc.perform(get("/api/admin/reports"))
-               .andExpect(status().isOk());
-    }
-    </code-block>
+<step><b>Simuler un utilisateur avec des rôles spécifiques</b></step>
+<p>C'est le cas le plus courant pour tester les autorisations.</p>
 
-    <step><b>Simuler un utilisateur avec des autorisations ("authorities")</b></step>
-    <p>Si votre sécurité n'est pas basée sur des rôles (<code>ROLE_...</code>) mais sur des autorisations plus fines.</p>
-    <code-block lang="java">
-    @Test
-    @WithMockUser(authorities = "book:read")
-    void testEndpointForUserWithReadPermission() throws Exception {
-        // ...
-    }
-    </code-block>
+```java
+@Test
+@WithMockUser(roles = {"ADMIN", "AUDITOR"})
+void testEndpointForAdminAndAuditor() throws Exception {
+    mockMvc.perform(get("/api/admin/reports"))
+           .andExpect(status().isOk());
+}
+```
+
+<step><b>Simuler un utilisateur avec des autorisations ("authorities")</b></step>
+<p>Si votre sécurité n'est pas basée sur des rôles (<code>ROLE_...</code>) mais sur des autorisations plus fines.</p>
+
+```java
+@Test
+@WithMockUser(authorities = "book:read")
+void testEndpointForUserWithReadPermission() throws Exception {
+    // ...
+}
+```
 
 </procedure>
 
