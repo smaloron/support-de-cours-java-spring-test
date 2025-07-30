@@ -76,7 +76,15 @@ Intégrer Testcontainers est étonnamment simple.
             &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
             &lt;scope&gt;test&lt;/scope&gt;
         &lt;/dependency&gt;
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
     &lt;/dependencies&gt;
+
+    
 </code-block>
     
 <step><b>Annoter votre classe de test</b></step>
@@ -166,6 +174,10 @@ class BookRepositoryPostgresTest {
         registry.add("spring.datasource.url", postgres::getJdbcUrl);
         registry.add("spring.datasource.username", postgres::getUsername);
         registry.add("spring.datasource.password", postgres::getPassword);
+        registry.add("spring.datasource.driver-class-name",
+                () -> "org.postgresql.Driver"); // <--- Ajout obligatoire
+        registry.add("spring.jpa.database-platform",
+                () -> "org.hibernate.dialect.PostgreSQLDialect");
     }
 
     @Test
